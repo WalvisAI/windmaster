@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Field Target Wind Master</title>
+  <meta name="description" content="Privacy policy for Field Target Wind Master (WindMaster). Offline-first, no ads, no analytics; optional multiplayer via Firebase; payments via Google Play Billing.">
+  <meta name="theme-color" content="#0b100b">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('wm-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+        var l = localStorage.getItem('wm-lang');
+        if (l !== 'en' && l !== 'es') { var n = (navigator.language || 'en').toLowerCase(); l = n.indexOf('es') === 0 ? 'es' : 'en'; }
+        document.documentElement.setAttribute('data-lang', l);
+        document.documentElement.setAttribute('lang', l);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="index.html" aria-label="WindMaster home">
+      <img src="assets/img/logo.png" alt="WindMaster logo" width="34" height="34">
+      <span class="brand-logotype"><span class="wm-wind">WIND</span><span class="wm-master">MASTER</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+      <a href="index.html#features" data-en="Features" data-es="Funciones">Features</a>
+      <a href="ballistics.html" data-en="How it works" data-es="Cómo funciona">How it works</a>
+    </div>
+    <div class="nav-tools">
+      <div class="toggle-group" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <button type="button" class="icon-btn" data-toggle-theme aria-label="Switch theme">
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button type="button" class="icon-btn hamburger" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="container prose">
+    <h1 class="lang-en">Privacy Policy</h1>
+    <h1 class="lang-es">Política de Privacidad</h1>
+    <p style="color:var(--text-mute);font-size:.9rem">Field Target Wind Master &nbsp;·&nbsp;
+      <span class="lang-en">Effective date: 11 June 2026 · Developer: WalvisAI</span>
+      <span class="lang-es">Fecha de entrada en vigor: 11 de junio de 2026 · Desarrollador: WalvisAI</span>
+    </p>
+    <p class="lang-es" style="color:var(--text-mute);font-size:.82rem"><em>La versión en inglés es la versión oficial; esta traducción se ofrece por cortesía.</em></p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:16px">
+  <div class="container prose">
+
+    <h2 class="lang-en">1. Overview</h2><h2 class="lang-es">1. Resumen</h2>
+    <p class="lang-en">Field Target Wind Master ("the App") is a field target shooting simulation game published on Google Play by WalvisAI. We are committed to protecting your privacy. This policy explains what information the App collects, how it is used, and your rights as a user.</p>
+    <p class="lang-es">Field Target Wind Master ("la App") es un juego de simulación de tiro de field target publicado en Google Play por WalvisAI. Nos comprometemos a proteger tu privacidad. Esta política explica qué información recopila la App, cómo se usa y tus derechos como usuario.</p>
+    <div class="hl-box">
+      <span class="lang-en">We do not collect personal information for advertising or profiling. All single-player features work fully offline; the optional online multiplayer mode uses Google Firebase to run game sessions, as described below.</span>
+      <span class="lang-es">No recopilamos información personal para publicidad ni elaboración de perfiles. Todas las funciones de un jugador funcionan totalmente sin conexión; el modo multijugador online opcional usa Google Firebase para gestionar las partidas, como se describe abajo.</span>
+    </div>
+
+    <h2 class="lang-en">2. Information Stored on Your Device</h2><h2 class="lang-es">2. Información almacenada en tu dispositivo</h2>
+    <p class="lang-en">The App saves the following data <strong>locally on your device only</strong>, using Android's SharedPreferences mechanism. This data does not leave your device except as described in Section 3:</p>
+    <p class="lang-es">La App guarda los siguientes datos <strong>solo localmente en tu dispositivo</strong>, mediante el mecanismo SharedPreferences de Android. Estos datos no salen de tu dispositivo salvo lo descrito en la Sección 3:</p>
+    <ul class="lang-en">
+      <li>Game settings (units, difficulty, scope selection, magnification preferences)</li>
+      <li>Visual preferences (light/dark mode, reticle options, colour settings)</li>
+      <li>Ballistic parameters you enter (muzzle velocity, pellet weight, ballistic coefficient, etc.)</li>
+      <li>In-app toggle states (red dot, sound, music, kill zone options)</li>
+    </ul>
+    <ul class="lang-es">
+      <li>Ajustes de juego (unidades, dificultad, selección de mira, preferencias de aumentos)</li>
+      <li>Preferencias visuales (modo claro/oscuro, opciones de retícula, ajustes de color)</li>
+      <li>Parámetros balísticos que introduces (velocidad inicial, peso del balín, coeficiente balístico, etc.)</li>
+      <li>Estados de los interruptores de la app (punto rojo, sonido, música, opciones de kill zone)</li>
+    </ul>
+
+    <h2 class="lang-en">3. Multiplayer and Online Features</h2><h2 class="lang-es">3. Multijugador y funciones online</h2>
+    <p class="lang-en">When you use the optional multiplayer mode, the App connects to Google Firebase servers. The following data is transmitted and temporarily stored on Firebase infrastructure for the duration of a multiplayer session:</p>
+    <p class="lang-es">Cuando usas el modo multijugador opcional, la App se conecta a los servidores de Google Firebase. Los siguientes datos se transmiten y almacenan temporalmente en la infraestructura de Firebase durante una partida multijugador:</p>
+    <ul class="lang-en">
+      <li>An anonymous session identifier generated by Firebase Authentication (not linked to your name, email, or Google account)</li>
+      <li>Multiplayer session state (game settings, shot results, scores) while the session is active</li>
+      <li>A display name you choose for use within the session (optional)</li>
+    </ul>
+    <ul class="lang-es">
+      <li>Un identificador de sesión anónimo generado por Firebase Authentication (no vinculado a tu nombre, correo o cuenta de Google)</li>
+      <li>El estado de la partida (ajustes, resultados de disparos, puntuaciones) mientras la sesión está activa</li>
+      <li>Un nombre para mostrar que eliges para usar dentro de la sesión (opcional)</li>
+    </ul>
+    <p class="lang-en">This data is used solely to run the multiplayer session. It is not used for profiling, advertising, or any other purpose, and we do not retain it after the session ends. Firebase is operated by Google and governed by Google's Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+    <p class="lang-es">Estos datos se usan únicamente para gestionar la partida multijugador. No se usan para perfiles, publicidad ni ningún otro fin, y no los conservamos después de que termine la sesión. Firebase es operado por Google y se rige por la Política de Privacidad de Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+
+    <h2 class="lang-en">4. Premium Features and Payments</h2><h2 class="lang-es">4. Funciones Premium y pagos</h2>
+    <p class="lang-en">Some features in the App — identified by a 🔒 lock symbol — require a one-time purchase to unlock. This includes access to certain scope reticles and advanced settings.</p>
+    <p class="lang-es">Algunas funciones de la App — identificadas con un símbolo de candado 🔒 — requieren una compra única para desbloquearse. Esto incluye el acceso a ciertas retículas de mira y ajustes avanzados.</p>
+    <p class="lang-en">All payments are processed exclusively through <strong>Google Play Billing</strong>. We do not handle, process, or store any payment card or financial information. Google's own privacy policy governs all billing transactions: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+    <p class="lang-es">Todos los pagos se procesan exclusivamente mediante <strong>Google Play Billing</strong>. No gestionamos, procesamos ni almacenamos ninguna tarjeta de pago ni información financiera. La política de privacidad de Google rige todas las transacciones de cobro: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+
+    <h2 class="lang-en">5. Third-Party Services</h2><h2 class="lang-es">5. Servicios de terceros</h2>
+    <p class="lang-en">The App integrates the following Google services:</p>
+    <p class="lang-es">La App integra los siguientes servicios de Google:</p>
+    <table>
+      <thead><tr><th><span class="lang-en">Service</span><span class="lang-es">Servicio</span></th><th><span class="lang-en">Purpose</span><span class="lang-es">Finalidad</span></th></tr></thead>
+      <tbody>
+        <tr><td>Google Play Billing</td><td><span class="lang-en">Processing purchases for premium features</span><span class="lang-es">Procesar compras de funciones premium</span></td></tr>
+        <tr><td>Google Play In-App Updates</td><td><span class="lang-en">Notifying users of available app updates</span><span class="lang-es">Avisar de actualizaciones disponibles</span></td></tr>
+        <tr><td>Firebase Authentication</td><td><span class="lang-en">Anonymous session identification for multiplayer</span><span class="lang-es">Identificación de sesión anónima para multijugador</span></td></tr>
+        <tr><td>Firebase Firestore</td><td><span class="lang-en">Real-time multiplayer session data</span><span class="lang-es">Datos de partida multijugador en tiempo real</span></td></tr>
+      </tbody>
+    </table>
+    <p class="lang-en">No advertising networks, analytics tools, or crash-reporting services are used in the App.</p>
+    <p class="lang-es">No se usan redes de publicidad, herramientas de analítica ni servicios de informe de fallos en la App.</p>
+
+    <h2 class="lang-en">6. Permissions</h2><h2 class="lang-es">6. Permisos</h2>
+    <p class="lang-en">The App does not request access to your camera, microphone, contacts, location, or any other sensitive device data. The only system access required is internet connectivity, used for Google Play's in-app update check and for the optional multiplayer mode.</p>
+    <p class="lang-es">La App no solicita acceso a tu cámara, micrófono, contactos, ubicación ni ningún otro dato sensible del dispositivo. El único acceso del sistema requerido es la conexión a internet, usada para la comprobación de actualizaciones de Google Play y para el modo multijugador opcional.</p>
+
+    <h2 class="lang-en">7. Children's Privacy</h2><h2 class="lang-es">7. Privacidad de los menores</h2>
+    <p class="lang-en">The App does not knowingly collect any information from children under the age of 13. It contains no advertising and no chat or messaging features. The only social element is anonymous multiplayer sessions, which use a display name you choose and no personal profile. It is suitable for general audiences.</p>
+    <p class="lang-es">La App no recopila conscientemente ninguna información de menores de 13 años. No contiene publicidad ni funciones de chat o mensajería. El único elemento social son las partidas multijugador anónimas, que usan un nombre para mostrar que eliges y ningún perfil personal. Es apta para todos los públicos.</p>
+
+    <h2 class="lang-en">8. Data Retention and Deletion</h2><h2 class="lang-es">8. Conservación y eliminación de datos</h2>
+    <p class="lang-en">All locally stored data is deleted automatically when you uninstall the App. You can also clear the App's data at any time without uninstalling via: <strong>Android Settings → Apps → Field Target Wind Master → Storage → Clear Data</strong></p>
+    <p class="lang-es">Todos los datos almacenados localmente se eliminan automáticamente al desinstalar la App. También puedes borrar los datos de la App en cualquier momento sin desinstalar en: <strong>Ajustes de Android → Aplicaciones → Field Target Wind Master → Almacenamiento → Borrar datos</strong></p>
+    <p class="lang-en">Multiplayer session data held on Firebase is transient and not retained after a session concludes. The anonymous Firebase Authentication identifier is not linked to any persistent profile.</p>
+    <p class="lang-es">Los datos de partida en Firebase son transitorios y no se conservan tras finalizar la sesión. El identificador anónimo de Firebase Authentication no está vinculado a ningún perfil persistente.</p>
+
+    <h2 class="lang-en">9. Changes to This Policy</h2><h2 class="lang-es">9. Cambios en esta política</h2>
+    <p class="lang-en">If we make material changes to this policy, we will update the effective date at the top of this page and post the revised version at the same URL. Continued use of the App after changes are posted constitutes acceptance of the updated policy.</p>
+    <p class="lang-es">Si hacemos cambios sustanciales en esta política, actualizaremos la fecha de entrada en vigor al principio de esta página y publicaremos la versión revisada en la misma URL. El uso continuado de la App tras publicarse los cambios constituye la aceptación de la política actualizada.</p>
+
+    <h2 class="lang-en">10. Contact</h2><h2 class="lang-es">10. Contacto</h2>
+    <p class="lang-en">If you have any questions or concerns about this Privacy Policy, please contact us at: <a href="mailto:windmasterft@gmail.com">windmasterft@gmail.com</a></p>
+    <p class="lang-es">Si tienes preguntas o dudas sobre esta Política de Privacidad, contáctanos en: <a href="mailto:windmasterft@gmail.com">windmasterft@gmail.com</a></p>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:0;margin:0;padding:0;justify-content:center">
+      <span>© <span data-year>2026</span> WalvisAI · Field Target Wind Master · <a href="mailto:windmasterft@gmail.com">windmasterft@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

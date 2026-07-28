@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How the ballistics work — WindMaster</title>
+  <meta name="description" content="Inside WindMaster's ballistics engine: a time-stepped GA drag simulation for diabolo pellets, validated against Strelok Pro. Wind zones, inclined fire, real atmosphere, SFP/FFP reticles.">
+  <meta name="theme-color" content="#0b100b">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/logo.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How the WindMaster ballistics engine works">
+  <meta property="og:description" content="A time-stepped GA drag simulation for airgun pellets, validated against Strelok Pro. Wind zones, inclined fire and real atmosphere.">
+  <meta property="og:image" content="assets/img/logo.png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('wm-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+        var l = localStorage.getItem('wm-lang');
+        if (l !== 'en' && l !== 'es') { var n = (navigator.language || 'en').toLowerCase(); l = n.indexOf('es') === 0 ? 'es' : 'en'; }
+        document.documentElement.setAttribute('data-lang', l);
+        document.documentElement.setAttribute('lang', l);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="index.html" aria-label="WindMaster home">
+      <img src="assets/img/logo.png" alt="WindMaster logo" width="34" height="34">
+      <span class="brand-logotype"><span class="wm-wind">WIND</span><span class="wm-master">MASTER</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html#features" data-en="Features" data-es="Funciones">Features</a>
+      <a href="index.html#modes" data-en="Modes" data-es="Modos">Modes</a>
+      <a href="index.html#scopes" data-en="Scopes" data-es="Miras">Scopes</a>
+      <a href="ballistics.html" data-en="How it works" data-es="Cómo funciona">How it works</a>
+    </div>
+    <div class="nav-tools">
+      <div class="toggle-group" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <button type="button" class="icon-btn" data-toggle-theme aria-label="Switch theme">
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a class="btn btn-play btn-sm nav-cta" href="https://play.google.com/store/apps/details?id=com.walvisai.fieldtargetwindmaster" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3.5v17c0 .8.9 1.3 1.6.9l14-8.5c.6-.4.6-1.3 0-1.7l-14-8.5C3.9 2.2 3 2.7 3 3.5z"/></svg>
+        <span data-en="Get the app" data-es="Descargar">Get the app</span>
+      </a>
+      <button type="button" class="icon-btn hamburger" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container" style="max-width:820px;text-align:center">
+    <span class="kicker" data-en="Under the hood" data-es="Por dentro">Under the hood</span>
+    <h1 class="lang-en">How the ballistics engine works</h1>
+    <h1 class="lang-es">Cómo funciona el motor balístico</h1>
+    <p class="lang-en" style="color:var(--text-dim);font-size:1.1rem">No black box. WindMaster runs its own time-stepped simulation of the pellet in flight — the same physics that drives every game shot and every table in the app.</p>
+    <p class="lang-es" style="color:var(--text-dim);font-size:1.1rem">Sin caja negra. WindMaster ejecuta su propia simulación por pasos de tiempo del balín en vuelo — la misma física que mueve cada disparo del juego y cada tabla de la app.</p>
+  </div>
+</section>
+
+<!-- THE ENGINE + DRAG CHART -->
+<section class="section">
+  <div class="container reticle-band">
+    <div>
+      <span class="kicker" data-en="The model" data-es="El modelo">The model</span>
+      <h2 class="lang-en">A GA drag model, built for pellets</h2>
+      <h2 class="lang-es">Un modelo de resistencia GA, hecho para balines</h2>
+      <p class="lang-en">A pellet's ballistic coefficient (BC) is a single number for how well it holds velocity. The drag <em>function</em> is the shape of how air resistance changes with speed. WindMaster uses the <strong>GA</strong> curve, tuned for wasp-waisted diabolo pellets — its characteristic subsonic dip (a drag minimum around Mach 0.5–0.6) is exactly why the rifle-bullet G1 curve is wrong for airguns. Pellets live deep in the subsonic range, so only the low end of the curve is ever used. G1 is available too, for slugs.</p>
+      <p class="lang-es">El coeficiente balístico (BC) de un balín es un único número de cómo conserva la velocidad. La <em>función</em> de resistencia es la forma en que el rozamiento cambia con la velocidad. WindMaster usa la curva <strong>GA</strong>, ajustada a los diábolos de cintura de avispa — su característico valle subsónico (un mínimo de resistencia hacia Mach 0,5–0,6) es justo por lo que la curva G1 de bala de rifle no sirve para el aire comprimido. Los balines viven muy en subsónico, así que solo se usa la parte baja de la curva. G1 también está disponible, para slugs.</p>
+    </div>
+    <div class="chart-card">
+      <h3 class="lang-en">Drag coefficient: GA vs G1</h3><h3 class="lang-es">Coeficiente de resistencia: GA vs G1</h3>
+      <div class="chart-sub"><span class="lang-en">Cd against Mach number — pellets sit in the shaded band</span><span class="lang-es">Cd frente al número de Mach — los balines están en la banda sombreada</span></div>
+      <div class="chart-legend"><span class="lg"><span class="sw" style="background:var(--series-1)"></span>GA</span><span class="lg"><span class="sw" style="background:var(--series-2)"></span>G1</span></div>
+      <div class="chart-holder" data-chart="drag"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT INTEGRATES -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-en="The method" data-es="El método">The method</span>
+      <h2 class="lang-en">Simulated step by step</h2><h2 class="lang-es">Simulado paso a paso</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3 class="lang-en">0.25 ms time steps</h3><h3 class="lang-es">Pasos de 0,25 ms</h3>
+        <p class="lang-en">The pellet is advanced in tiny time steps. At each one the engine looks up drag at the current Mach, applies it with gravity and a Magnus term, and moves the pellet.</p>
+        <p class="lang-es">El balín avanza en pasos de tiempo diminutos. En cada uno el motor consulta la resistencia al Mach actual, la aplica con la gravedad y un término Magnus, y mueve el balín.</p>
+      </div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
+        <h3 class="lang-en">Zero solved exactly</h3><h3 class="lang-es">Cero resuelto con exactitud</h3>
+        <p class="lang-en">The barrel angle that crosses your line of sight at the zero range is found by bisection — not assumed — so scope height and zero distance are honoured precisely.</p>
+        <p class="lang-es">El ángulo de cañón que cruza tu línea de mira a la distancia de cero se halla por bisección — no se asume — así se respetan con precisión la altura de mira y la distancia de cero.</p>
+      </div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3 class="lang-en">Validated vs Strelok Pro</h3><h3 class="lang-es">Contrastado con Strelok Pro</h3>
+        <p class="lang-en">Checked against a Strelok Pro GA export: elevation and windage match to under 0.2 cm out to 200 m, and within 0.7% at 300 m. A unit test guards it from drifting.</p>
+        <p class="lang-es">Verificado contra una exportación GA de Strelok Pro: elevación y deriva coinciden con menos de 0,2 cm hasta 200 m, y dentro del 0,7% a 300 m. Un test unitario evita que se desvíe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT PREDICTS (charts) -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-en="The output" data-es="El resultado">The output</span>
+      <h2 class="lang-en">What it predicts</h2><h2 class="lang-es">Qué predice</h2>
+      <p class="lang-en">For every range: drop, wind drift, time of flight and remaining velocity — turned into holdover in mil or MOA, or clicks on the turret.</p>
+      <p class="lang-es">Para cada distancia: caída, deriva del viento, tiempo de vuelo y velocidad remanente — convertidos en holdover en mil o MOA, o clics en la torreta.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="chart-card">
+        <h3 class="lang-en">Pellet path</h3><h3 class="lang-es">Trayectoria</h3>
+        <div class="chart-sub"><span class="lang-en">Height vs line of sight, 25 m zero</span><span class="lang-es">Altura vs línea de mira, cero a 25 m</span></div>
+        <div class="chart-legend"><span class="lg"><span class="sw" style="background:var(--series-1)"></span><span data-en="pellet path" data-es="trayectoria">pellet path</span></span><span class="lg"><span class="sw dash"></span><span data-en="line of sight" data-es="línea de mira">line of sight</span></span></div>
+        <div class="chart-holder" data-chart="trajectory"></div>
+      </div>
+      <div class="chart-card">
+        <h3 class="lang-en">Wind drift</h3><h3 class="lang-es">Deriva del viento</h3>
+        <div class="chart-sub"><span class="lang-en">10 km/h crosswind — light vs heavy pellet</span><span class="lang-es">Viento cruzado 10 km/h — balín ligero vs pesado</span></div>
+        <div class="chart-legend"><span class="lg"><span class="sw" style="background:var(--series-1)"></span>.177 · 8.4 gr</span><span class="lg"><span class="sw" style="background:var(--series-2)"></span>.22 · 18 gr</span></div>
+        <div class="chart-holder" data-chart="wind"></div>
+      </div>
+      <div class="chart-card">
+        <h3 class="lang-en">Velocity retention</h3><h3 class="lang-es">Retención de velocidad</h3>
+        <div class="chart-sub"><span class="lang-en">.177 8.4 gr — energy 15.5 J → ~8.7 J at 50 m</span><span class="lang-es">.177 8,4 gr — energía 15,5 J → ~8,7 J a 50 m</span></div>
+        <div class="chart-legend"><span class="lg"><span class="sw" style="background:var(--series-1)"></span><span data-en="velocity (m/s)" data-es="velocidad (m/s)">velocity (m/s)</span></span></div>
+        <div class="chart-holder" data-chart="velocity"></div>
+      </div>
+    </div>
+    <p class="chart-note" style="text-align:center;margin-top:16px"><span class="lang-en">Charts are illustrative curves in realistic ranges; your exact figures come from your profile in the app.</span><span class="lang-es">Los gráficos son curvas ilustrativas en rangos realistas; tus cifras exactas salen de tu perfil en la app.</span></p>
+  </div>
+</section>
+
+<!-- INPUTS TABLE -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-en="Your equipment" data-es="Tu equipo">Your equipment</span>
+      <h2 class="lang-en">What you tell it</h2><h2 class="lang-es">Qué le indicas</h2>
+      <p class="lang-en">Build a profile per rifle. Defaults shown are typical starting points for a sub-12 ft-lb .177.</p>
+      <p class="lang-es">Crea un perfil por rifle. Los valores por defecto son puntos de partida típicos para un .177 de menos de 12 ft-lb.</p>
+    </div>
+    <div class="table-scroll">
+      <table class="spec-table">
+        <caption data-en="Ballistic profile inputs" data-es="Entradas del perfil balístico">Ballistic profile inputs</caption>
+        <thead><tr>
+          <th data-en="Parameter" data-es="Parámetro">Parameter</th>
+          <th data-en="Typical value" data-es="Valor típico">Typical value</th>
+          <th data-en="Units offered" data-es="Unidades disponibles">Units offered</th>
+        </tr></thead>
+        <tbody>
+          <tr><td data-en="Muzzle velocity" data-es="Velocidad inicial">Muzzle velocity</td><td class="num">780 <span class="u">fps</span></td><td class="u">m/s · fps</td></tr>
+          <tr><td data-en="Ballistic coefficient (GA)" data-es="Coeficiente balístico (GA)">Ballistic coefficient (GA)</td><td class="num">0.021–0.024 <span class="u">lb/in²</span></td><td class="u">GA · G1</td></tr>
+          <tr><td data-en="Pellet weight" data-es="Peso del balín">Pellet weight</td><td class="num">8.44 <span class="u">gr</span></td><td class="u">gr · g</td></tr>
+          <tr><td data-en="Pellet calibre / length" data-es="Calibre / longitud">Pellet calibre / length</td><td class="num">4.50 / 6.0 <span class="u">mm</span></td><td class="u">mm</td></tr>
+          <tr><td data-en="Barrel twist & direction" data-es="Paso y sentido de rayado">Barrel twist &amp; direction</td><td class="num">1:18" <span class="u">RH</span></td><td class="u">in · RH/LH</td></tr>
+          <tr><td data-en="Zero range" data-es="Distancia de cero">Zero range</td><td class="num">25 <span class="u">m</span></td><td class="u">m · yd</td></tr>
+          <tr><td data-en="Scope height over bore" data-es="Altura de mira sobre ánima">Scope height over bore</td><td class="num">76 <span class="u">mm</span></td><td class="u">mm</td></tr>
+          <tr><td data-en="Turret click value" data-es="Valor de clic de torreta">Turret click value</td><td class="num">0.05 <span class="u">mrad</span></td><td class="u">mrad · MOA</td></tr>
+          <tr><td data-en="Temperature" data-es="Temperatura">Temperature</td><td class="num">20 <span class="u">°C</span></td><td class="u">°C · °F</td></tr>
+          <tr><td data-en="Altitude" data-es="Altitud">Altitude</td><td class="num">0 <span class="u">m</span></td><td class="u">m</td></tr>
+          <tr><td data-en="Sea-level pressure" data-es="Presión a nivel del mar">Sea-level pressure</td><td class="num">1010 <span class="u">hPa</span></td><td class="u">hPa · inHg</td></tr>
+          <tr><td data-en="Humidity" data-es="Humedad">Humidity</td><td class="num">78 <span class="u">%</span></td><td class="u">%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WIND & WIND AREAS -->
+<section class="section">
+  <div class="container reticle-band">
+    <div class="reticle-visual"><div class="phone"><div class="phone-screen"><img src="assets/img/mockups/mock-windareas.svg" alt="Wind Areas top-down view with per-band wind and an obstacle"></div></div></div>
+    <div>
+      <span class="kicker" data-en="Wind" data-es="Viento">Wind</span>
+      <h2 class="lang-en">Wind that changes down the lane</h2>
+      <h2 class="lang-es">Viento que cambia a lo largo del carril</h2>
+      <p class="lang-en">Wind is a speed and a meteorological "from" direction. A pure crosswind pushes the pellet sideways; a head or tailwind subtly changes drop and time of flight. <strong>Wind Areas</strong> goes further: split the distance to the target into bands, each with its own wind, and the engine runs one continuous flight while swapping the wind as the pellet crosses each boundary — so velocity and spin carry across. You can even drop in obstacles: a solid <em>wall</em> gives dead air behind it, a <em>tree</em> lets part of the wind through.</p>
+      <p class="lang-es">El viento es una velocidad y una dirección meteorológica de "procedencia". Un viento cruzado puro empuja el balín de lado; un viento de frente o de cola cambia sutilmente la caída y el tiempo de vuelo. <strong>Áreas de viento</strong> va más allá: divide la distancia al blanco en tramos, cada uno con su viento, y el motor ejecuta un único vuelo continuo cambiando el viento cuando el balín cruza cada frontera — así la velocidad y el giro se conservan. Incluso puedes añadir obstáculos: un <em>muro</em> sólido deja aire muerto detrás, un <em>árbol</em> deja pasar parte del viento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INCLINED + ATMOSPHERE -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="grid grid-2">
+      <div class="card">
+        <span class="mode-badge" data-en="Inclined fire" data-es="Tiro inclinado">Inclined fire</span>
+        <h3 class="lang-en">Real slope maths, not the cosine rule</h3>
+        <h3 class="lang-es">Matemática real de pendiente, no la regla del coseno</h3>
+        <p class="lang-en">Uphill and downhill shots are solved by re-running the whole trajectory in the sight-line frame, splitting gravity into components along and across the slope. It's symmetric for up and down, and far more honest than simply multiplying range by the cosine of the angle — which is why the app can teach you the real correction for an angled HFT target.</p>
+        <p class="lang-es">Los tiros cuesta arriba y cuesta abajo se resuelven volviendo a calcular toda la trayectoria en el marco de la línea de mira, descomponiendo la gravedad en componentes a lo largo y a través de la pendiente. Es simétrico arriba y abajo, y mucho más honesto que multiplicar la distancia por el coseno del ángulo — por eso la app te enseña la corrección real para un blanco HFT inclinado.</p>
+      </div>
+      <div class="card">
+        <span class="mode-badge" data-en="Atmosphere" data-es="Atmósfera">Atmosphere</span>
+        <h3 class="lang-en">The air is modelled, not ignored</h3>
+        <h3 class="lang-es">El aire se modela, no se ignora</h3>
+        <p class="lang-en">Air density comes from temperature, altitude, sea-level pressure and humidity; the speed of sound shifts with temperature. Because Mach — and therefore drag — depends on both, a cold morning at altitude gives a different curve to a warm day at sea level. Spin drift and gyroscopic stability (Miller's rule) are modelled too, as fine refinements rather than headline effects.</p>
+        <p class="lang-es">La densidad del aire sale de la temperatura, la altitud, la presión a nivel del mar y la humedad; la velocidad del sonido cambia con la temperatura. Como el Mach — y por tanto la resistencia — depende de ambos, una mañana fría en altura da una curva distinta a un día cálido a nivel del mar. La deriva por giro y la estabilidad giroscópica (regla de Miller) también se modelan, como refinamientos finos más que como efectos protagonistas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RETICLES & UNITS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-en="Optics & units" data-es="Ópticas y unidades">Optics &amp; units</span>
+      <h2 class="lang-en">Reticles and units, done properly</h2>
+      <h2 class="lang-es">Retículas y unidades, bien hechas</h2>
+    </div>
+    <div class="callout" style="margin-bottom:20px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="3" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="21" y2="12"/></svg>
+      <p><span class="lang-en"><strong>Second focal plane (SFP)</strong> reticles keep a fixed size while the image zooms, so a mark's real value scales with magnification — the app tracks each scope's calibration power so subtensions stay true. <strong>First focal plane (FFP)</strong> reticles scale with zoom, so subtensions are always correct. Both are handled, in mil and MOA.</span><span class="lang-es"><strong>Las retículas de segundo plano focal (SFP)</strong> mantienen un tamaño fijo mientras la imagen hace zoom, así que el valor real de una marca escala con el aumento — la app sigue la potencia de calibración de cada visor para que las subtensiones sigan siendo ciertas. <strong>Las de primer plano focal (FFP)</strong> escalan con el zoom, así que las subtensiones siempre son correctas. Ambas se tratan, en mil y MOA.</span></p>
+    </div>
+    <div class="grid grid-4">
+      <div class="card" style="text-align:center"><div class="scope-count" style="justify-content:center;margin:0"><div><div class="n">26+</div><div class="l" data-en="reticle types" data-es="tipos de retícula">reticle types</div></div></div></div>
+      <div class="card" style="text-align:center"><div class="scope-count" style="justify-content:center;margin:0"><div><div class="n">mil · MOA</div><div class="l" data-en="angular units" data-es="unidades angulares">angular units</div></div></div></div>
+      <div class="card" style="text-align:center"><div class="scope-count" style="justify-content:center;margin:0"><div><div class="n">m · yd</div><div class="l" data-en="distance" data-es="distancia">distance</div></div></div></div>
+      <div class="card" style="text-align:center"><div class="scope-count" style="justify-content:center;margin:0"><div><div class="n">J · ft-lb</div><div class="l" data-en="energy" data-es="energía">energy</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HONESTY CALLOUT + CTA -->
+<section class="section cta-band">
+  <div class="container">
+    <h2 class="lang-en">Honest physics, so training transfers.</h2>
+    <h2 class="lang-es">Física honesta, para que el entrenamiento se transfiera.</h2>
+    <p class="lang-en">Game physics are driven by the ballistic profile you configure — match it to your real equipment and the shot you learn on screen is the shot you'll take on the course.</p>
+    <p class="lang-es">La física del juego se basa en el perfil balístico que configuras — hazlo coincidir con tu equipo real y el disparo que aprendes en pantalla es el que harás en el recorrido.</p>
+    <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.walvisai.fieldtargetwindmaster" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3.5v17c0 .8.9 1.3 1.6.9l14-8.5c.6-.4.6-1.3 0-1.7l-14-8.5C3.9 2.2 3 2.7 3 3.5z"/></svg>
+      <span class="bp-text"><span class="bp-sub" data-en="Get it on" data-es="Disponible en">Get it on</span><span class="bp-main">Google Play</span></span>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="34" height="34"><span class="brand-logotype"><span class="wm-wind">WIND</span><span class="wm-master">MASTER</span></span></a>
+        <p class="lang-en">Field Target Wind Master — a reticle and wind-reading trainer for airgun Field Target. Built by WalvisAI.</p>
+        <p class="lang-es">Field Target Wind Master — un entrenador de retícula y lectura de viento para Field Target de aire comprimido. Creado por WalvisAI.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4 data-en="Product" data-es="Producto">Product</h4>
+          <a href="index.html#features" data-en="Features" data-es="Funciones">Features</a>
+          <a href="index.html#modes" data-en="Game modes" data-es="Modos de juego">Game modes</a>
+          <a href="ballistics.html" data-en="Ballistics" data-es="Balística">Ballistics</a>
+          <a href="https://play.google.com/store/apps/details?id=com.walvisai.fieldtargetwindmaster" target="_blank" rel="noopener">Google Play</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Legal & contact" data-es="Legal y contacto">Legal &amp; contact</h4>
+          <a href="privacy.html" data-en="Privacy policy" data-es="Política de privacidad">Privacy policy</a>
+          <a href="mailto:windmasterft@gmail.com">windmasterft@gmail.com</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Preferences" data-es="Preferencias">Preferences</h4>
+          <span data-set-lang="en" role="button" tabindex="0">English</span>
+          <span data-set-lang="es" role="button" tabindex="0">Español</span>
+          <span data-toggle-theme role="button" tabindex="0" data-en="Toggle theme" data-es="Cambiar tema">Toggle theme</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> WalvisAI · Field Target Wind Master</span>
+      <span data-en="Made for the Field Target community" data-es="Hecho para la comunidad del Field Target">Made for the Field Target community</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/charts.js" defer></script>
+</body>
+</html>

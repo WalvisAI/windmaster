@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WindMaster — Field Target ballistics & wind-reading trainer</title>
+  <meta name="description" content="WindMaster (Field Target Wind Master): a real airgun ballistics calculator and reticle/wind-reading trainer for Android. Authentic scope reticles, live wind, three disciplines. English & Spanish.">
+  <meta name="theme-color" content="#0b100b">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="WindMaster — Field Target ballistics & wind-reading trainer">
+  <meta property="og:description" content="A real airgun ballistics engine, authentic scope reticles and live wind. Train reticle & wind reading anywhere. Android · English & Spanish.">
+  <meta property="og:image" content="assets/img/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('wm-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+        var l = localStorage.getItem('wm-lang');
+        if (l !== 'en' && l !== 'es') { var n = (navigator.language || 'en').toLowerCase(); l = n.indexOf('es') === 0 ? 'es' : 'en'; }
+        document.documentElement.setAttribute('data-lang', l);
+        document.documentElement.setAttribute('lang', l);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="index.html" aria-label="WindMaster home">
+      <img src="assets/img/logo.png" alt="WindMaster logo" width="34" height="34">
+      <span class="brand-logotype"><span class="wm-wind">WIND</span><span class="wm-master">MASTER</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#features" data-en="Features" data-es="Funciones">Features</a>
+      <a href="#physics" data-en="Ballistics" data-es="Balística">Ballistics</a>
+      <a href="#modes" data-en="Modes" data-es="Modos">Modes</a>
+      <a href="#scopes" data-en="Scopes" data-es="Miras">Scopes</a>
+      <a href="ballistics.html" data-en="How it works" data-es="Cómo funciona">How it works</a>
+    </div>
+    <div class="nav-tools">
+      <div class="toggle-group" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <button type="button" class="icon-btn" data-toggle-theme aria-label="Switch theme">
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a class="btn btn-play btn-sm nav-cta" href="https://play.google.com/store/apps/details?id=com.walvisai.fieldtargetwindmaster" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3.5v17c0 .8.9 1.3 1.6.9l14-8.5c.6-.4.6-1.3 0-1.7l-14-8.5C3.9 2.2 3 2.7 3 3.5z"/></svg>
+        <span data-en="Get the app" data-es="Descargar">Get the app</span>
+      </a>
+      <button type="button" class="icon-btn hamburger" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <b>v4.0.38</b> · Android · <span data-en="Real GA ballistics" data-es="Balística GA real">Real GA ballistics</span>
+      </span>
+      <h1>
+        <span class="lang-en">The Field Target range that fits in <span class="hl">your pocket.</span></span>
+        <span class="lang-es">El campo de Field Target que cabe en <span class="hl">tu bolsillo.</span></span>
+      </h1>
+      <p class="hero-tagline">
+        <span class="lang-en">A real ballistics engine, authentic scope reticles and live, gusting wind — so you can train reticle and wind reading anywhere.</span>
+        <span class="lang-es">Un motor balístico real, retículas de miras auténticas y viento vivo y racheado — entrena la lectura de retícula y viento donde sea.</span>
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.walvisai.fieldtargetwindmaster" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3.5v17c0 .8.9 1.3 1.6.9l14-8.5c.6-.4.6-1.3 0-1.7l-14-8.5C3.9 2.2 3 2.7 3 3.5z"/></svg>
+          <span class="bp-text"><span class="bp-sub" data-en="Get it on" data-es="Disponible en">Get it on</span><span class="bp-main">Google Play</span></span>
+        </a>
+        <a class="btn btn-ghost" href="#physics"><span data-en="See the ballistics" data-es="Ver la balística">See the ballistics</span> →</a>
+      </div>
+      <div class="hero-meta">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-en="No ads · no tracking" data-es="Sin anuncios · sin rastreo">No ads · no tracking</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M5 5h14M5 19h14"/></svg><span data-en="One-time Premium" data-es="Premium de pago único">One-time Premium</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg><span>English / Español</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3v18"/></svg><span data-en="Metric or yards" data-es="Métrico o yardas">Metric or yards</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone floaty">
+        <div class="phone-screen"><img src="assets/img/mockups/mock-scope.svg" alt="WindMaster scope view with reticle, target and wind flag" loading="eager"></div>
+        <span class="phone-tag" data-en="Illustration · swap for real screenshots" data-es="Ilustración · sustituye por capturas reales">Illustration · swap for real screenshots</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<div class="trust">
+  <div class="trust-row">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Real GA drag model" data-es="Modelo de resistencia GA">Real GA drag model</span></span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Validated vs Strelok Pro" data-es="Contrastado con Strelok Pro">Validated vs Strelok Pro</span></span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="26+ real reticles" data-es="Más de 26 retículas reales">26+ real reticles</span></span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Offline single-player" data-es="Un jugador sin conexión">Offline single-player</span></span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="No subscription — ever" data-es="Sin suscripciones — nunca">No subscription — ever</span></span>
+  </div>
+</div>
+
+<!-- ============ FEATURES ============ -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-en="Everything in one app" data-es="Todo en una app">Everything in one app</span>
+      <h2 class="lang-en">A learning tool first</h2>
+      <h2 class="lang-es">Ante todo, una herramienta de aprendizaje</h2>
+      <p class="lang-en">Field Target Wind Master is built as a trainer — the game is how you internalise that knowledge under pressure. These are the tools behind it.</p>
+      <p class="lang-es">Field Target Wind Master está pensado como entrenador — el juego es la forma de interiorizar ese conocimiento bajo presión. Estas son las herramientas que lo sostienen.</p>
+    </div>
+    <div class="grid grid-4">
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg></div>
+        <h3>Ballistic Calculator<span class="card-es-name">Calc balística</span></h3>
+        <p data-en="Pellet, velocity, atmosphere and scope in one solver." data-es="Pellet, velocidad, atmósfera y mira en un solo cálculo.">Pellet, velocity, atmosphere and scope in one solver.</p>
+      </article>
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 12h15a3 3 0 1 1-3 3"/><path d="M3 16h9a2.5 2.5 0 1 1-2.5 2.5"/></svg></div>
+        <h3>Wind Table<span class="card-es-name">Tabla de viento</span></h3>
+        <p data-en="Drift reference by range and wind speed." data-es="Referencia de deriva por distancia y viento.">Drift reference by range and wind speed.</p>
+      </article>
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 12 15 2 8.5 12 2"/><polyline points="2 15.5 12 22 22 15.5"/></svg></div>
+        <h3>Wind Areas<span class="card-es-name">Áreas de viento</span></h3>
+        <p data-en="Wind drift across distance bands, with walls and trees." data-es="Deriva del viento por tramos, con muros y árboles.">Wind drift across distance bands, with walls and trees.</p>
+      </article>
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div>
+        <h3>POI Reticle<span class="card-es-name">Retícula POI</span></h3>
+        <p data-en="Live point of impact projected on your reticle." data-es="Punto de impacto en vivo sobre tu retícula.">Live point of impact projected on your reticle.</p>
+      </article>
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21a15 15 0 0 1 15-15"/><path d="M3 21h6"/><path d="M3 21v-6"/><line x1="3" y1="21" x2="21" y2="3"/></svg></div>
+        <h3>Angle Table<span class="card-es-name">Tabla de ángulos</span></h3>
+        <p data-en="Angle correction with elevation in clicks." data-es="Corrección angular con elevación en clics.">Angle correction with elevation in clicks.</p>
+      </article>
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg></div>
+        <h3>Field Calibration<span class="card-es-name">Calibración de campo</span></h3>
+        <p data-en="True your data — BC, speed and scope height — to your rifle." data-es="Ajusta tus datos — BC, velocidad y altura de mira — a tu rifle.">True your data — BC, speed and scope height — to your rifle.</p>
+      </article>
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg></div>
+        <h3>HFT Dope Card<span class="card-es-name">Chuleta HFT</span></h3>
+        <p data-en="A holdover card built for your exact reticle." data-es="Una tarjeta de referencias para tu retícula exacta.">A holdover card built for your exact reticle.</p>
+      </article>
+      <article class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3>Training Log<span class="card-es-name">Entrenamiento</span></h3>
+        <p data-en="Log real shoots, see weak points, export your history." data-es="Registra tiradas reales, ve puntos débiles y exporta tu historial.">Log real shoots, see weak points, export your history.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHYSICS / CHARTS ============ -->
+<section class="section section-alt" id="physics">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-en="Under the hood" data-es="Por dentro">Under the hood</span>
+      <h2 class="lang-en">Real ballistics, not an arcade</h2>
+      <h2 class="lang-es">Balística de verdad, no un arcade</h2>
+      <p class="lang-en">A time-stepped simulator with a drag model tuned for diabolo pellets. Feed it your pellet, velocity and atmosphere and it tells you exactly where the pellet goes.</p>
+      <p class="lang-es">Un simulador por pasos de tiempo con un modelo de resistencia ajustado a los balines diábolo. Dale tu balín, velocidad y atmósfera y te dice exactamente dónde cae.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="chart-card">
+        <h3 class="lang-en">Pellet path</h3><h3 class="lang-es">Trayectoria</h3>
+        <div class="chart-sub"><span class="lang-en">Height vs your line of sight, 25 m zero</span><span class="lang-es">Altura frente a tu línea de mira, cero a 25 m</span></div>
+        <div class="chart-legend"><span class="lg"><span class="sw" style="background:var(--series-1)"></span><span data-en="pellet path" data-es="trayectoria">pellet path</span></span><span class="lg"><span class="sw dash"></span><span data-en="line of sight" data-es="línea de mira">line of sight</span></span></div>
+        <div class="chart-holder" data-chart="trajectory"></div>
+      </div>
+      <div class="chart-card">
+        <h3 class="lang-en">Wind drift</h3><h3 class="lang-es">Deriva del viento</h3>
+        <div class="chart-sub"><span class="lang-en">10 km/h full crosswind — pellet vs pellet</span><span class="lang-es">Viento cruzado de 10 km/h — balín contra balín</span></div>
+        <div class="chart-legend"><span class="lg"><span class="sw" style="background:var(--series-1)"></span>.177 · 8.4 gr</span><span class="lg"><span class="sw" style="background:var(--series-2)"></span>.22 · 18 gr</span></div>
+        <div class="chart-holder" data-chart="wind"></div>
+      </div>
+      <div class="chart-card">
+        <h3 class="lang-en">Velocity retention</h3><h3 class="lang-es">Retención de velocidad</h3>
+        <div class="chart-sub"><span class="lang-en">.177 8.4 gr — ~56% of muzzle energy at 50 m</span><span class="lang-es">.177 8,4 gr — ~56% de la energía inicial a 50 m</span></div>
+        <div class="chart-legend"><span class="lg"><span class="sw" style="background:var(--series-1)"></span><span data-en="velocity (m/s)" data-es="velocidad (m/s)">velocity (m/s)</span></span></div>
+        <div class="chart-holder" data-chart="velocity"></div>
+        <p class="chart-note"><span class="lang-en">Illustrative curves in realistic ranges — the app computes exact values from your profile.</span><span class="lang-es">Curvas ilustrativas en rangos realistas — la app calcula los valores exactos desde tu perfil.</span></p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:34px">
+      <a class="btn btn-ghost" href="ballistics.html"><span data-en="How the ballistics engine works" data-es="Cómo funciona el motor balístico">How the ballistics engine works</span> →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GAME MODES ============ -->
+<section class="section" id="modes">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-en="Three disciplines + multiplayer" data-es="Tres disciplinas + multijugador">Three disciplines + multiplayer</span>
+      <h2 class="lang-en">Practice how you compete</h2>
+      <h2 class="lang-es">Entrena como compites</h2>
+    </div>
+
+    <div class="mode">
+      <div class="mode-media"><div class="phone"><div class="phone-screen"><img src="assets/img/mockups/mock-hft.svg" alt="Hunter Field Target inclined shot with stance and angle"></div></div></div>
+      <div class="mode-copy">
+        <span class="mode-badge">Field Target · HFT</span>
+        <h3 class="lang-en">Knockdowns, stances and angled shots</h3>
+        <h3 class="lang-es">Siluetas abatibles, posturas y tiros inclinados</h3>
+        <p class="lang-en">Field Target runs knockdown lanes with kill zones from 9 to 50 m across three difficulties. Hunter Field Target adds forced stances — standing, kneeling, supported — and inclined shots that make you correct like you would on the course, with reduced kill zones on close targets.</p>
+        <p class="lang-es">Field Target ofrece recorridos con siluetas y kill zones de 9 a 50 m en tres dificultades. Hunter Field Target añade posturas obligadas — de pie, de rodillas, con apoyo — y tiros inclinados que te obligan a corregir como en el recorrido, con zonas de muerte reducidas en blancos cercanos.</p>
+        <div class="chips"><span class="chip" data-en="9–50 m" data-es="9–50 m">9–50 m</span><span class="chip" data-en="Easy · Medium · Difficult" data-es="Fácil · Medio · Difícil">Easy · Medium · Difficult</span><span class="chip" data-en="Reduced kill zones" data-es="Zonas de muerte reducidas">Reduced kill zones</span><span class="chip" data-en="Inclined fire" data-es="Tiro inclinado">Inclined fire</span></div>
+      </div>
+    </div>
+
+    <div class="mode reverse">
+      <div class="mode-media"><div class="phone"><div class="phone-screen"><img src="assets/img/mockups/mock-multiplayer.svg" alt="Multiplayer live standings and invite code"></div></div></div>
+      <div class="mode-copy">
+        <span class="mode-badge" data-en="Bench Rest · Long range · Online" data-es="Bench Rest · Larga distancia · Online">Bench Rest · Long range · Online</span>
+        <h3 class="lang-en">Bench Rest cards and live multiplayer</h3>
+        <h3 class="lang-es">Cartones de Bench Rest y multijugador en vivo</h3>
+        <p class="lang-en">Shoot the official 25-card at 25 or 50 m with WRABF scoring and X-count tie-breaks, or stretch out in free practice to 300 m. Online, every shooter faces the same seeded course with the rival's progress live — including a "wind only" mode that competes on the one thing that really separates good from great.</p>
+        <p class="lang-es">Dispara el cartón oficial de 25 casillas a 25 o 50 m con puntuación WRABF y desempate por X, o alárgate en práctica libre hasta 300 m. Online, todos afrontan el mismo recorrido con la misma semilla y el progreso del rival en directo — incluido un modo "solo viento" que compite en lo que de verdad separa a los buenos de los muy buenos.</p>
+        <div class="chips"><span class="chip">Bench Rest 25 / 50 m</span><span class="chip" data-en="WRABF scoring" data-es="Puntuación WRABF">WRABF scoring</span><span class="chip" data-en="Up to 300 m" data-es="Hasta 300 m">Up to 300 m</span><span class="chip" data-en="Seeded multiplayer" data-es="Multijugador con semilla">Seeded multiplayer</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCOPES / RETICLES ============ -->
+<section class="section section-alt" id="scopes">
+  <div class="container reticle-band">
+    <div class="reticle-visual">
+      <div class="phone"><div class="phone-screen"><img src="assets/img/mockups/mock-table.svg" alt="Wind table with reticle holdover"></div></div>
+    </div>
+    <div>
+      <span class="kicker" data-en="Authentic optics" data-es="Ópticas auténticas">Authentic optics</span>
+      <h2 class="lang-en">Train with your exact reticle</h2>
+      <h2 class="lang-es">Entrena con tu retícula exacta</h2>
+      <p class="lang-en">Aim through a simulated scope with reticles from real models — Sightron, Schmidt &amp; Bender, Falcon, Element, Optisan, Delta, Nikko Stirling, Hawke, Valiant, Bushnell and more. Each reticle is individually calibrated with its true cm and inch marks at every magnification, with correct second-focal-plane behaviour and a turret with clicks, turns and your scope's click value.</p>
+      <p class="lang-es">Apunta a través de un visor simulado con retículas de modelos reales — Sightron, Schmidt &amp; Bender, Falcon, Element, Optisan, Delta, Nikko Stirling, Hawke, Valiant, Bushnell y más. Cada retícula está calibrada individualmente con sus marcas reales en cm y pulgadas a cada aumento, con el comportamiento correcto de segundo plano focal y una torreta con clics, vueltas y el valor de clic de tu visor.</p>
+      <div class="scope-count">
+        <div><div class="n">26+</div><div class="l" data-en="real reticles" data-es="retículas reales">real reticles</div></div>
+        <div><div class="n">SFP + FFP</div><div class="l" data-en="handled correctly" data-es="tratados correctamente">handled correctly</div></div>
+        <div><div class="n">2</div><div class="l" data-en="free to start" data-es="gratis para empezar">free to start</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-en="At a glance" data-es="De un vistazo">At a glance</span>
+      <h2 class="lang-en">Tools and modes in your hand</h2>
+      <h2 class="lang-es">Herramientas y modos en tu mano</h2>
+    </div>
+    <div class="gallery">
+      <div class="phone"><div class="phone-screen"><img src="assets/img/mockups/mock-scope.svg" alt="Scope view" loading="lazy"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="assets/img/mockups/mock-windareas.svg" alt="Wind Areas" loading="lazy"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="assets/img/mockups/mock-table.svg" alt="Wind Table" loading="lazy"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="assets/img/mockups/mock-training.svg" alt="Training log" loading="lazy"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="assets/img/mockups/mock-multiplayer.svg" alt="Multiplayer standings" loading="lazy"></div></div>
+    </div>
+    <p class="gallery-cap"><span class="lang-en">Illustrations of the real app — swap in your own screenshots any time.</span><span class="lang-es">Ilustraciones de la app real — sustituye por tus propias capturas cuando quieras.</span></p>
+  </div>
+</section>
+
+<!-- ============ PREMIUM ============ -->
+<section class="section section-alt" id="premium">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-en="Fair pricing" data-es="Precio justo">Fair pricing</span>
+      <h2 class="lang-en">Free to play. One payment unlocks everything.</h2>
+      <h2 class="lang-es">Gratis para jugar. Un pago lo desbloquea todo.</h2>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <h3 data-en="Free" data-es="Gratis">Free</h3>
+        <div class="price" data-en="Download and play" data-es="Descarga y juega">Download and play</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="All three disciplines and practice modes" data-es="Las tres disciplinas y modos de práctica">All three disciplines and practice modes</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="The full ballistics calculator" data-es="La calculadora balística completa">The full ballistics calculator</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Two free scope reticles" data-es="Dos retículas de visor gratis">Two free scope reticles</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Online multiplayer" data-es="Multijugador online">Online multiplayer</span></li>
+        </ul>
+      </div>
+      <div class="tier tier-pro">
+        <h3>Premium <span class="tag-pill" data-en="One-time" data-es="Pago único">One-time</span></h3>
+        <div class="price"><b data-en="Single payment" data-es="Pago único">Single payment</b> · <span data-en="no subscription ever" data-es="sin suscripción nunca">no subscription ever</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="All branded scope reticles — current & future" data-es="Todas las miras con marca — actuales y futuras">All branded scope reticles — current &amp; future</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Advanced ballistic features — Field Calibration & more" data-es="Funciones balísticas avanzadas — Calibración de Campo y más">Advanced ballistic features — Field Calibration &amp; more</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="Billed securely through Google Play" data-es="Cobro seguro mediante Google Play">Billed securely through Google Play</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">FAQ</span>
+      <h2 class="lang-en">Good questions</h2><h2 class="lang-es">Buenas preguntas</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary><span class="lang-en">Is it a game or a training tool?</span><span class="lang-es">¿Es un juego o una herramienta de entrenamiento?</span></summary>
+        <p class="lang-en">Both — and it's built trainer-first. Think of it less as a game and more as a wind-and-reticle trainer: the game is how you internalise that knowledge under pressure, while having fun.</p>
+        <p class="lang-es">Ambas cosas — y está pensado ante todo como entrenador. Piénsalo menos como un juego y más como un entrenador de retícula y viento: el juego es la forma de interiorizar ese conocimiento bajo presión, mientras disfrutas.</p>
+      </details>
+      <details>
+        <summary><span class="lang-en">How accurate is the ballistics?</span><span class="lang-es">¿Qué precisión tiene la balística?</span></summary>
+        <p class="lang-en">The engine is a time-stepped simulation using a GA drag model tuned for diabolo pellets, validated against a Strelok Pro GA export — reproducing elevation and windage to under 0.2 cm out to 200 m. It models real atmosphere (temperature, altitude, pressure, humidity), Magnus spin drift and proper inclined fire.</p>
+        <p class="lang-es">El motor es una simulación por pasos de tiempo con un modelo de resistencia GA ajustado a los diábolos, contrastado con una exportación GA de Strelok Pro — reproduce elevación y deriva con menos de 0,2 cm hasta 200 m. Modela atmósfera real (temperatura, altitud, presión, humedad), deriva Magnus por giro y tiro inclinado correcto.</p>
+      </details>
+      <details>
+        <summary><span class="lang-en">Does it work offline? What about my data?</span><span class="lang-es">¿Funciona sin conexión? ¿Y mis datos?</span></summary>
+        <p class="lang-en">All single-player features work fully offline. Settings and ballistic profiles are stored locally on your device. There are no ads, no analytics and no crash reporting. Only the optional online multiplayer connects to a server. See the <a href="privacy.html">privacy policy</a>.</p>
+        <p class="lang-es">Todas las funciones de un jugador funcionan sin conexión. Los ajustes y perfiles balísticos se guardan localmente en tu dispositivo. No hay anuncios, ni analíticas, ni informes de fallos. Solo el multijugador online opcional se conecta a un servidor. Consulta la <a href="privacy.html">política de privacidad</a>.</p>
+      </details>
+      <details>
+        <summary><span class="lang-en">Which units and pellets are supported?</span><span class="lang-es">¿Qué unidades y balines admite?</span></summary>
+        <p class="lang-en">Meters or yards, km/h or mph, m/s or fps, grains or grams, mil or MOA, joules or ft-lb, °C or °F, hPa or inHg. There's a built-in pellet library across .177, .22 and .25, and you can add your own pellets and multiple rifle profiles.</p>
+        <p class="lang-es">Metros o yardas, km/h o mph, m/s o fps, grains o gramos, mil o MOA, julios o ft-lb, °C o °F, hPa o inHg. Incluye una biblioteca de balines en .177, .22 y .25, y puedes añadir tus propios balines y varios perfiles de rifle.</p>
+      </details>
+      <details>
+        <summary><span class="lang-en">What does it cost?</span><span class="lang-es">¿Cuánto cuesta?</span></summary>
+        <p class="lang-en">The download is free and includes all disciplines, the calculator and multiplayer. A single one-time Premium payment unlocks every branded reticle and the advanced ballistic features — no subscriptions, ever.</p>
+        <p class="lang-es">La descarga es gratuita e incluye todas las disciplinas, la calculadora y el multijugador. Un único pago Premium desbloquea todas las retículas con marca y las funciones balísticas avanzadas — sin suscripciones, nunca.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section cta-band">
+  <div class="container">
+    <h2 class="lang-en">Bring the range with you.</h2>
+    <h2 class="lang-es">Lleva el campo contigo.</h2>
+    <p class="lang-en">Read the wind, correct on the reticle, and make the shot — anywhere.</p>
+    <p class="lang-es">Lee el viento, corrige en la retícula y haz el disparo — donde sea.</p>
+    <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.walvisai.fieldtargetwindmaster" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3.5v17c0 .8.9 1.3 1.6.9l14-8.5c.6-.4.6-1.3 0-1.7l-14-8.5C3.9 2.2 3 2.7 3 3.5z"/></svg>
+      <span class="bp-text"><span class="bp-sub" data-en="Get it on" data-es="Disponible en">Get it on</span><span class="bp-main">Google Play</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="34" height="34"><span class="brand-logotype"><span class="wm-wind">WIND</span><span class="wm-master">MASTER</span></span></a>
+        <p class="lang-en">Field Target Wind Master — a reticle and wind-reading trainer for airgun Field Target. Built by WalvisAI.</p>
+        <p class="lang-es">Field Target Wind Master — un entrenador de retícula y lectura de viento para Field Target de aire comprimido. Creado por WalvisAI.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4 data-en="Product" data-es="Producto">Product</h4>
+          <a href="#features" data-en="Features" data-es="Funciones">Features</a>
+          <a href="#modes" data-en="Game modes" data-es="Modos de juego">Game modes</a>
+          <a href="ballistics.html" data-en="Ballistics" data-es="Balística">Ballistics</a>
+          <a href="https://play.google.com/store/apps/details?id=com.walvisai.fieldtargetwindmaster" target="_blank" rel="noopener">Google Play</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Legal & contact" data-es="Legal y contacto">Legal &amp; contact</h4>
+          <a href="privacy.html" data-en="Privacy policy" data-es="Política de privacidad">Privacy policy</a>
+          <a href="mailto:windmasterft@gmail.com">windmasterft@gmail.com</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Preferences" data-es="Preferencias">Preferences</h4>
+          <span data-set-lang="en" role="button" tabindex="0">English</span>
+          <span data-set-lang="es" role="button" tabindex="0">Español</span>
+          <span data-toggle-theme role="button" tabindex="0" data-en="Toggle theme" data-es="Cambiar tema">Toggle theme</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> WalvisAI · Field Target Wind Master</span>
+      <span data-en="Made for the Field Target community" data-es="Hecho para la comunidad del Field Target">Made for the Field Target community</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/charts.js" defer></script>
+</body>
+</html>

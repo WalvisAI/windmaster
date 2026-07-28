@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 610" font-family="system-ui, 'Segoe UI', Roboto, sans-serif">
+  <rect width="300" height="610" fill="#0c120c"/>
+  <text x="18" y="40" fill="#ffd464" font-size="15" font-weight="800" letter-spacing="1">WIND TABLE</text>
+  <text x="18" y="58" fill="#8a9c8a" font-size="10.5">Drift reference by range &amp; wind</text>
+
+  <!-- column head -->
+  <g transform="translate(0,76)">
+    <rect x="14" y="0" width="272" height="26" rx="7" fill="#1a231a"/>
+    <g font-size="10" fill="#ffd464" font-weight="700">
+      <text x="26" y="17">m</text><text x="86" y="17" text-anchor="middle">8 km/h</text><text x="150" y="17" text-anchor="middle">12 km/h</text><text x="214" y="17" text-anchor="middle">16 km/h</text><text x="274" y="17" text-anchor="end">20</text>
+    </g>
+  </g>
+  <!-- rows -->
+  <g transform="translate(0,110)" font-size="11.5" font-variant-numeric="tabular-nums">
+    <g fill="#c9d6c9">
+      <!-- row template: range | v1 | v2 | v3 | v4 -->
+      <g><rect x="14" y="0" width="272" height="30" fill="#0f150f"/><text x="26" y="20" fill="#8a9c8a" font-weight="700">15</text><text x="86" y="20" text-anchor="middle">0.4</text><text x="150" y="20" text-anchor="middle">0.6</text><text x="214" y="20" text-anchor="middle">0.8</text><text x="274" y="20" text-anchor="end">1.0</text></g>
+      <g transform="translate(0,30)"><rect x="14" y="0" width="272" height="30" fill="#131b13"/><text x="26" y="20" fill="#8a9c8a" font-weight="700">20</text><text x="86" y="20" text-anchor="middle">0.5</text><text x="150" y="20" text-anchor="middle">0.8</text><text x="214" y="20" text-anchor="middle">1.1</text><text x="274" y="20" text-anchor="end">1.4</text></g>
+      <g transform="translate(0,60)"><rect x="14" y="0" width="272" height="30" fill="#0f150f"/><text x="26" y="20" fill="#8a9c8a" font-weight="700">25</text><text x="86" y="20" text-anchor="middle">0.7</text><text x="150" y="20" text-anchor="middle">1.1</text><text x="214" y="20" text-anchor="middle">1.5</text><text x="274" y="20" text-anchor="end">1.9</text></g>
+      <!-- highlighted row -->
+      <g transform="translate(0,90)"><rect x="14" y="0" width="272" height="30" fill="#233a1e" stroke="#3a6a2a"/><text x="26" y="20" fill="#eeeeaa" font-weight="800">30</text><text x="86" y="20" text-anchor="middle">0.9</text><text x="150" y="20" text-anchor="middle" fill="#ffd464" font-weight="800">1.5</text><text x="214" y="20" text-anchor="middle">2.0</text><text x="274" y="20" text-anchor="end">2.5</text></g>
+      <g transform="translate(0,120)"><rect x="14" y="0" width="272" height="30" fill="#131b13"/><text x="26" y="20" fill="#8a9c8a" font-weight="700">35</text><text x="86" y="20" text-anchor="middle">1.2</text><text x="150" y="20" text-anchor="middle">1.9</text><text x="214" y="20" text-anchor="middle">2.6</text><text x="274" y="20" text-anchor="end">3.3</text></g>
+      <g transform="translate(0,150)"><rect x="14" y="0" width="272" height="30" fill="#0f150f"/><text x="26" y="20" fill="#8a9c8a" font-weight="700">40</text><text x="86" y="20" text-anchor="middle">1.6</text><text x="150" y="20" text-anchor="middle">2.4</text><text x="214" y="20" text-anchor="middle">3.3</text><text x="274" y="20" text-anchor="end">4.2</text></g>
+      <g transform="translate(0,180)"><rect x="14" y="0" width="272" height="30" fill="#131b13"/><text x="26" y="20" fill="#8a9c8a" font-weight="700">45</text><text x="86" y="20" text-anchor="middle">2.0</text><text x="150" y="20" text-anchor="middle">3.0</text><text x="214" y="20" text-anchor="middle">4.1</text><text x="274" y="20" text-anchor="end">5.2</text></g>
+      <g transform="translate(0,210)"><rect x="14" y="0" width="272" height="30" fill="#0f150f"/><text x="26" y="20" fill="#8a9c8a" font-weight="700">50</text><text x="86" y="20" text-anchor="middle">2.5</text><text x="150" y="20" text-anchor="middle">3.7</text><text x="214" y="20" text-anchor="middle">5.0</text><text x="274" y="20" text-anchor="end">6.4</text></g>
+    </g>
+  </g>
+  <text x="150" y="392" text-anchor="middle" fill="#647263" font-size="10">values in mil · full-value crosswind</text>
+
+  <!-- reticle holdover strip -->
+  <g transform="translate(150,470)">
+    <text x="0" y="-18" text-anchor="middle" fill="#8a9c8a" font-size="10.5">30 m · 12 km/h → hold on the reticle</text>
+    <line x1="-120" y1="0" x2="120" y2="0" stroke="#3a4a30"/>
+    <line x1="0" y1="-46" x2="0" y2="46" stroke="#c9d6c9" stroke-width="1"/>
+    <g stroke="#c9d6c9" fill="#c9d6c9">
+      <circle cx="-30" cy="0" r="1.6"/><circle cx="-60" cy="0" r="1.6"/><circle cx="-90" cy="0" r="1.6"/>
+      <circle cx="30" cy="0" r="1.6"/><circle cx="60" cy="0" r="1.6"/><circle cx="90" cy="0" r="1.6"/>
+      <line x1="-6" y1="15" x2="6" y2="15" stroke-width="0.8"/><line x1="-6" y1="30" x2="6" y2="30" stroke-width="0.8"/>
+    </g>
+    <circle cx="-45" cy="30" r="4" fill="#ffd464"/>
+    <text x="-45" y="58" text-anchor="middle" fill="#ffd464" font-size="9" font-weight="700">aim here</text>
+  </g>
+</svg>
