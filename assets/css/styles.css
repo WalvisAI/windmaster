@@ -271,6 +271,14 @@ p { margin: 0 0 1em; }
 }
 .phone-screen { position: relative; width: 100%; height: 100%; border-radius: 30px; overflow: hidden; background: #0a0f0a; }
 .phone-screen svg { width: 100%; height: 100%; display: block; }
+.phone-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* real screenshots: match the cropped aspect and drop the fake notch */
+.phone.shot { aspect-ratio: 720 / 1500; }
+.phone.shot::before { display: none; }
+/* wide (landscape) screenshot figure */
+.shot-wide { margin: 26px 0 0; }
+.shot-wide img { width: 100%; border-radius: 14px; border: 1px solid var(--border-strong); box-shadow: var(--shadow); display: block; }
+.shot-wide figcaption { text-align: center; color: var(--text-mute); font-size: .82rem; margin-top: 10px; }
 .phone-tag {
   position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
   background: var(--surface-3); border: 1px solid var(--border-strong); color: var(--text-dim);

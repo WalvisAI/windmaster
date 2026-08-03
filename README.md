@@ -20,7 +20,7 @@ assets/js/main.js       Language toggle, theme toggle, mobile nav
 assets/js/charts.js     Lightweight SVG charts (illustrative ballistics data)
 assets/img/logo.png     Brand mark (from the app's drawable/logo1.png)
 assets/img/favicon.svg  Tab icon
-assets/img/mockups/*.svg  App-screen illustrations (placeholders — see below)
+assets/img/screens/*.jpg  Real app screenshots (status bar cropped — see below)
 .nojekyll          Tells Pages to serve /assets untouched
 ```
 
@@ -42,18 +42,23 @@ assets/img/mockups/*.svg  App-screen illustrations (placeholders — see below)
    pick `main` / `/ (root)`, Save.
 4. Wait ~1 minute, then open **https://walvisai.github.io/windmaster/**.
 
-## Swap in real screenshots
+## Updating the screenshots
 
-The phone frames currently show hand-built SVG illustrations in `assets/img/mockups/`.
-To use real screenshots, either:
+The phone frames show real app screenshots in `assets/img/screens/` (portrait,
+720×1500, with the Android status bar cropped off the top).
 
-- replace a mockup file with your own (keep the same filename), **or**
+To replace or add one:
+
+- overwrite a file in `assets/img/screens/` (keep the same filename), **or**
 - edit the `<img src="…">` inside a `.phone-screen` in `index.html` /
-  `ballistics.html` to point at your PNG (put it in `assets/img/`).
+  `ballistics.html` to point at your new image.
 
-Portrait screenshots around **1080×2160** look best in the frame. You can also
-delete the small "Illustration · swap for real screenshots" tag in the hero once
-real screenshots are in.
+New screenshots should have the **top status bar (clock / Wi-Fi / battery)
+cropped off** so they match the rest. A ready-made cropper lives in the repo
+history — on Windows it trims the top ~90 px and downscales portrait shots to
+720 px wide (landscape shots also get the right-edge nav bar trimmed). Keep
+portrait shots at the same aspect ratio (~720×1500) so they fill the `.phone.shot`
+frame without cropping.
 
 ## Editing copy
 
