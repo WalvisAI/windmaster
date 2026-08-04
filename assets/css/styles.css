@@ -402,6 +402,20 @@ p { margin: 0 0 1em; }
 .faq details[open] summary::after { transform: rotate(45deg); }
 .faq p { color: var(--text-dim); font-size: .95rem; padding-bottom: 16px; margin: 0; }
 
+/* ---- Hardware spotlight ---- */
+.section-spot {
+  background: radial-gradient(90% 75% at 82% 0%, color-mix(in srgb, var(--gold) 9%, transparent), transparent 60%), var(--bg-2);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.badge-new { display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--cta-ink); background: var(--gold); padding: 3px 11px; border-radius: 999px; margin-bottom: 1rem; }
+.duo { display: flex; gap: 18px; justify-content: center; align-items: flex-start; }
+.duo .phone { width: 196px; max-width: 42vw; }
+.duo .phone:nth-child(2) { margin-top: 30px; }
+.hw-list { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 11px; }
+.hw-list li { display: flex; gap: 11px; align-items: flex-start; color: var(--text-dim); font-size: .96rem; }
+.hw-list svg { width: 19px; height: 19px; color: var(--green); flex: none; margin-top: 2px; }
+.vendor-note { margin-top: 18px; font-size: .84rem; color: var(--text-mute); }
+
 /* ---- Gallery strip ---- */
 .gallery { display: flex; gap: 22px; overflow-x: auto; padding: 8px 2px 26px; scroll-snap-type: x mandatory; }
 .gallery .phone { width: 216px; flex: none; scroll-snap-align: center; }
