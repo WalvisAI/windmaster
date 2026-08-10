@@ -100,19 +100,22 @@
     }
   ],
 
-  "_supportersNote": "A directory of logo tiles, grouped into categories and drawn three across. 'logo' names a drawable bundled in the app (res/drawable + res/raw/keep.xml); a name this build doesn't ship falls back to the supporter's initials, so a newer feed can safely mention artwork an older app has never heard of. 'note' is the one line under the name — keep it to a few words or it clips. 'link.url' takes an {en,es} pair when the site has a separate page per language.",
+  "_supportersNote": "A directory of logo tiles, grouped into categories and drawn three across. 'logo' names a drawable bundled in the app (res/drawable + res/raw/keep.xml); a name this build doesn't ship falls back to the supporter's initials, so a newer feed can safely mention artwork an older app has never heard of. 'note' is an optional one-liner under the name — leave it out when the logo already says enough, and keep it to a few words or it clips. 'link.url' takes an {en,es} pair when the site has a separate page per language.",
 
   "supporters": [
     {
-      "category": { "en": "SHOPS", "es": "TIENDAS" },
+      "category": { "en": "SPECIALIZED SHOPS", "es": "TIENDAS ESPECIALIZADAS" },
       "items": [
+        {
+          "name": "Un poco de óxido",
+          "logo": "unpocodeoxido",
+          "link": {
+            "url": "https://unpocodeoxido.com/"
+          }
+        },
         {
           "name": "Submoa Systems",
           "logo": "submoasystems",
-          "note": {
-            "en": "Field target shop",
-            "es": "Tienda de field target"
-          },
           "link": {
             "url": {
               "en": "https://submoasystems.com/en/home/",
@@ -121,6 +124,78 @@
           }
         }
       ]
+    },
+    {
+      "category": { "en": "ANEMOMETERS", "es": "ANEMÓMETROS" },
+      "items": [
+        {
+          "name": "Tempest",
+          "logo": "tempest",
+          "link": {
+            "url": "https://shop.tempest.earth/collections/international-meters/products/weathermeter-precision-shooting"
+          }
+        },
+        {
+          "name": "Calypso Instruments",
+          "logo": "calypso_icon",
+          "link": {
+            "url": "https://www.calypsoinstruments.com/ballistics"
+          }
+        }
+      ]
+    }
+  ],
+
+  "_collaboratorsNote": "LEGACY — for installs older than the Supporters tab, which read 'collaborators' and know nothing about 'supporters'. Without this block those builds show an empty Collaborators tab the moment they fetch this feed. Current builds ignore it. Delete once the Supporters release has been out long enough that nobody is still on the old parser.",
+
+  "collaborators": [
+    {
+      "name": "BTMETER BT-8806WM",
+      "logo": "btmeter8806wm",
+      "role": {
+        "en": "Bluetooth anemometer — supported today",
+        "es": "Anemómetro Bluetooth — compatible ya"
+      },
+      "note": {
+        "en": "Cup anemometer with barometer, thermometer and hygrometer. Pair it in Learn -> Field Practice and the reticle shows a live point of impact from the wind actually blowing across you, with its atmosphere feeding the solver. Wind direction stays your own clock call — this meter has no vane.",
+        "es": "Anemómetro de cazoletas con barómetro, termómetro e higrómetro. Empareja en Aprender -> Práctica de campo y la retícula muestra el punto de impacto en vivo con el viento que sopla realmente sobre ti, y su atmósfera alimenta el cálculo. La dirección la sigues cantando tú: este medidor no tiene veleta."
+      },
+      "link": {
+        "url": "https://www.btmeter-store.com/products/btmeter-cup-anemometer-handheld-air-flow-meter-wind-speed-data-logger-w-barometer-measure-wind-velocity-temperature-altitude-humidity-for-hvac-air-ventilation-drone-hiking-outdoor-activities",
+        "label": { "en": "Product page", "es": "Página del producto" }
+      }
+    },
+    {
+      "name": "Tempest WEATHERmeter",
+      "logo": "weathermeter",
+      "role": {
+        "en": "Bluetooth anemometer — support coming soon",
+        "es": "Anemómetro Bluetooth — compatibilidad en camino"
+      },
+      "note": {
+        "en": "Impeller meter with a magnetometer, so it reads wind direction as well as speed: point it down the lane once and the clock dial follows the wind on its own. The decoder is already written — we are just waiting on hardware to test it against before we switch it on.",
+        "es": "Medidor de hélice con magnetómetro, así que lee dirección además de velocidad: apúntalo una vez hacia el blanco y la esfera del reloj sigue al viento sola. El descodificador ya está escrito: solo esperamos un medidor con el que probarlo antes de activarlo."
+      },
+      "link": {
+        "url": "https://shop.tempest.earth/collections/international-meters/products/weathermeter-precision-shooting",
+        "label": { "en": "Product page", "es": "Página del producto" }
+      }
+    },
+    {
+      "name": "Calypso Ultrasonic Portable Mini AB",
+      "logo": "calypso",
+      "role": {
+        "en": "Bluetooth anemometer — support coming soon",
+        "es": "Anemómetro Bluetooth — compatibilidad en camino"
+      },
+      "note": {
+        "en": "Ultrasonic, so there is nothing to spin: no cup, no impeller, no cut-in speed below which light wind reads as calm. It reports direction natively too. Support is planned and not yet started.",
+        "es": "Ultrasónico, así que no hay nada que gire: sin cazoletas, sin hélice y sin velocidad mínima por debajo de la cual la brisa se lee como calma. También da la dirección de forma nativa. La compatibilidad está prevista y aún no empezada."
+      },
+      "link": {
+        "url": "https://www.calypsoinstruments.com/shop/cmi1061-ultrasonic-portable-mini-ab-321",
+        "label": { "en": "Product page", "es": "Página del producto" }
+      }
     }
   ],
 
