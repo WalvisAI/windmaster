@@ -417,10 +417,21 @@ p { margin: 0 0 1em; }
 /* Brand marks are drawn for white paper, so they keep their own plate in both themes rather
    than being dropped straight onto the dark surface as mismatched bright rectangles. */
 .shop-plate {
-  display: grid; place-items: center; width: 100%; height: 92px;
-  background: #fff; border-radius: 12px; padding: 14px;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 84px; background: #fff; border-radius: 12px; padding: 12px;
+  /* Guard: whatever the artwork's intrinsic size, it can never spill onto the name below. */
+  overflow: hidden;
 }
-.shop-plate img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.shop-plate img {
+  display: block; width: auto; height: auto;
+  /* A flex item will not shrink below its intrinsic size while min-* is auto, so a tall logo
+     ignored max-height and overflowed the plate. These two are what let the cap take effect. */
+  min-width: 0; min-height: 0;
+  /* Capped in px rather than as a percentage so every mark lands at the same optical height,
+     whether it is a wide wordmark or a near-square pictorial one. */
+  max-width: 100%; max-height: 54px;
+  object-fit: contain;
+}
 .shop-card .shop-name { font-weight: 800; font-size: 1rem; line-height: 1.25; }
 .shop-card .shop-site { font-size: .82rem; color: var(--text-dim); word-break: break-word; }
 
