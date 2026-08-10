@@ -407,10 +407,10 @@ p { margin: 0 0 1em; }
    only has to be a few pixels too wide before the browser silently drops a column and strands the
    last card on a line of its own. Keep this number equal to the number of visible cards. */
 .shop-grid {
-  display: grid; gap: 14px; max-width: 680px; margin: 0 auto;
-  grid-template-columns: repeat(4, 1fr);
+  display: grid; gap: 14px; max-width: 820px; margin: 0 auto;
+  grid-template-columns: repeat(5, 1fr);
 }
-/* One row of four is too tight for a phone; two rows of two keeps the logos legible. */
+/* One row of five is too tight for a phone; rows of two keep the logos legible. */
 @media (max-width: 720px) {
   .shop-grid { grid-template-columns: repeat(2, 1fr); max-width: 420px; }
 }
