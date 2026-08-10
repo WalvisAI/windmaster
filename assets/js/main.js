@@ -23,10 +23,12 @@
       if (val !== null) el.textContent = val;
     }
     // swap attributes:  data-en-<attr> / data-es-<attr>  (e.g. data-en-aria-label)
-    var attrNodes = document.querySelectorAll("[data-" + lang + "-aria-label], [data-" + lang + "-title], [data-" + lang + "-alt]");
+    // href is in the list so a link can point each language at its own page — a shop with a
+    // separate English storefront, say. The markup still carries a real href for no-JS readers.
+    var attrNodes = document.querySelectorAll("[data-" + lang + "-aria-label], [data-" + lang + "-title], [data-" + lang + "-alt], [data-" + lang + "-href]");
     for (var j = 0; j < attrNodes.length; j++) {
       var a = attrNodes[j];
-      ["aria-label", "title", "alt"].forEach(function (attr) {
+      ["aria-label", "title", "alt", "href"].forEach(function (attr) {
         var v = a.getAttribute("data-" + lang + "-" + attr);
         if (v !== null) a.setAttribute(attr, v);
       });

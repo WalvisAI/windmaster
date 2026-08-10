@@ -402,6 +402,28 @@ p { margin: 0 0 1em; }
 .faq details[open] summary::after { transform: rotate(45deg); }
 .faq p { color: var(--text-dim); font-size: .95rem; padding-bottom: 16px; margin: 0; }
 
+/* ---- Specialized shops ---- */
+.shop-grid {
+  display: grid; gap: 18px; max-width: 720px; margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.shop-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 13px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px; text-decoration: none; color: inherit;
+  transition: transform .16s, border-color .16s;
+}
+.shop-card:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+/* Brand marks are drawn for white paper, so they keep their own plate in both themes rather
+   than being dropped straight onto the dark surface as mismatched bright rectangles. */
+.shop-plate {
+  display: grid; place-items: center; width: 100%; height: 92px;
+  background: #fff; border-radius: 12px; padding: 14px;
+}
+.shop-plate img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.shop-card .shop-name { font-weight: 800; font-size: 1rem; line-height: 1.25; }
+.shop-card .shop-site { font-size: .82rem; color: var(--text-dim); word-break: break-word; }
+
 /* ---- Hardware spotlight ---- */
 .section-spot {
   background: radial-gradient(90% 75% at 82% 0%, color-mix(in srgb, var(--gold) 9%, transparent), transparent 60%), var(--bg-2);
