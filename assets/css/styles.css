@@ -403,12 +403,16 @@ p { margin: 0 0 1em; }
 .faq p { color: var(--text-dim); font-size: .95rem; padding-bottom: 16px; margin: 0; }
 
 /* ---- Specialized shops ---- */
-/* Narrow enough that three cards clear the container with room to spare. The old 230px floor
-   needed 726px for three tracks against a 720px container, so auto-fit quietly dropped to two
-   columns and stranded the third card on a row of its own. */
+/* A fixed column count, not auto-fit: the shops are meant to read as one row, and a track floor
+   only has to be a few pixels too wide before the browser silently drops a column and strands the
+   last card on a line of its own. Keep this number equal to the number of visible cards. */
 .shop-grid {
-  display: grid; gap: 18px; max-width: 600px; margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: grid; gap: 14px; max-width: 680px; margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
+}
+/* One row of four is too tight for a phone; two rows of two keeps the logos legible. */
+@media (max-width: 720px) {
+  .shop-grid { grid-template-columns: repeat(2, 1fr); max-width: 420px; }
 }
 .shop-card {
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
