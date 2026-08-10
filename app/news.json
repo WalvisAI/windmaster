@@ -1,0 +1,149 @@
+{
+  "_comment": "Wind Master in-app feed (logo tap -> News / Supporters / Thanks). Two byte-identical copies exist, so this file reads the same in both: app/src/main/assets/news.json in the app repo is the offline seed shipped in the APK, and app/news.json in the WalvisAI/windmaster website repo is the live feed the app fetches every 6 h. To publish an update WITHOUT an app release, edit either copy, bump 'updated', copy it over the other one, and push the website repo. On the device the later 'updated' date wins (ties go to the remote), so a stale cache can never mask a newer seed that arrived with an app update. A fetch that fails silently keeps whatever the app already had.",
+  "updated": "2026-08-10",
+
+  "_newsNote": "'kind' is 'app' (a feature), 'hw' (a meter or other hardware) or 'partner'. 'logo' names a bundled drawable and is optional — see _supportersNote. 'link.url' may be a plain string or an {en,es} pair when each language has its own page.",
+
+  "news": [
+    {
+      "id": "2026-08-07-hw-weathermeter",
+      "date": "2026-08-07",
+      "kind": "hw",
+      "logo": "weathermeter",
+      "title": {
+        "en": "Tempest WEATHERmeter — support coming soon",
+        "es": "Tempest WEATHERmeter — compatibilidad en camino"
+      },
+      "body": {
+        "en": "Impeller meter with a magnetometer, so it reads wind direction as well as speed: point it down the lane once and the clock dial follows the wind on its own. The decoder is already written — we are just waiting on hardware to test it against before we switch it on.",
+        "es": "Medidor de hélice con magnetómetro, así que lee dirección además de velocidad: apúntalo una vez hacia el blanco y la esfera del reloj sigue al viento sola. El descodificador ya está escrito: solo esperamos un medidor con el que probarlo antes de activarlo."
+      },
+      "link": {
+        "url": "https://shop.tempest.earth/collections/international-meters/products/weathermeter-precision-shooting",
+        "label": { "en": "Product page", "es": "Página del producto" }
+      }
+    },
+    {
+      "id": "2026-08-07-hw-calypso",
+      "date": "2026-08-07",
+      "kind": "hw",
+      "logo": "calypso",
+      "title": {
+        "en": "Calypso Ultrasonic Portable Mini AB — planned",
+        "es": "Calypso Ultrasonic Portable Mini AB — previsto"
+      },
+      "body": {
+        "en": "Ultrasonic, so there is nothing to spin: no cup, no impeller, no cut-in speed below which light wind reads as calm. It reports direction natively too. Support is planned and not yet started.",
+        "es": "Ultrasónico, así que no hay nada que gire: sin cazoletas, sin hélice y sin velocidad mínima por debajo de la cual la brisa se lee como calma. También da la dirección de forma nativa. La compatibilidad está prevista y aún no empezada."
+      },
+      "link": {
+        "url": "https://www.calypsoinstruments.com/shop/cmi1061-ultrasonic-portable-mini-ab-321",
+        "label": { "en": "Product page", "es": "Página del producto" }
+      }
+    },
+    {
+      "id": "2026-08-04-field-practice",
+      "date": "2026-08-04",
+      "kind": "app",
+      "title": {
+        "en": "Field Practice with a live anemometer",
+        "es": "Práctica de campo con anemómetro en vivo"
+      },
+      "body": {
+        "en": "Pair a Bluetooth weather meter and the simulator reads your real wind, temperature and pressure instead of generated values. Range estimation uses the target faceplate as the size reference, so you practise the whole call - not just the hold.",
+        "es": "Empareja un medidor meteorológico Bluetooth y el simulador usará tu viento, temperatura y presión reales en lugar de valores generados. La estimación de distancia usa la cara del blanco como referencia de tamaño, así practicas la lectura completa, no sólo la corrección."
+      }
+    },
+    {
+      "id": "2026-08-04-hw-btmeter8806wm",
+      "date": "2026-08-04",
+      "kind": "hw",
+      "logo": "btmeter8806wm",
+      "title": {
+        "en": "BTMETER BT-8806WM — supported today",
+        "es": "BTMETER BT-8806WM — compatible ya"
+      },
+      "body": {
+        "en": "Cup anemometer with barometer, thermometer and hygrometer. Pair it in Learn -> Field Practice and the reticle shows a live point of impact from the wind actually blowing across you, with its atmosphere feeding the solver. Wind direction stays your own clock call — this meter has no vane.",
+        "es": "Anemómetro de cazoletas con barómetro, termómetro e higrómetro. Empareja en Aprender -> Práctica de campo y la retícula muestra el punto de impacto en vivo con el viento que sopla realmente sobre ti, y su atmósfera alimenta el cálculo. La dirección la sigues cantando tú: este medidor no tiene veleta."
+      },
+      "link": {
+        "url": "https://www.btmeter-store.com/products/btmeter-cup-anemometer-handheld-air-flow-meter-wind-speed-data-logger-w-barometer-measure-wind-velocity-temperature-altitude-humidity-for-hvac-air-ventilation-drone-hiking-outdoor-activities",
+        "label": { "en": "Product page", "es": "Página del producto" }
+      }
+    },
+    {
+      "id": "2026-08-04-training-log",
+      "date": "2026-07-26",
+      "kind": "app",
+      "title": {
+        "en": "Training log: record your real sessions",
+        "es": "Registro de entrenamiento: guarda tus sesiones reales"
+      },
+      "body": {
+        "en": "Learn -> Training keeps a lane-by-lane record of your actual shooting: hits, fails, notes and photos, with the day's conditions attached. Export the whole history (photos included) to a zip so it survives a new phone.",
+        "es": "Aprender -> Entrenamiento guarda un registro calle por calle de tu tiro real: aciertos, fallos, notas y fotos, con las condiciones del día adjuntas. Exporta todo el historial (fotos incluidas) a un zip para que sobreviva a un cambio de móvil."
+      }
+    },
+    {
+      "id": "2026-07-13-wind-areas",
+      "date": "2026-07-13",
+      "kind": "app",
+      "title": {
+        "en": "Wind Areas in the ballistic calculator",
+        "es": "Zonas de viento en la calculadora balística"
+      },
+      "body": {
+        "en": "Real lanes rarely have one wind. Wind Areas splits the shot into zones with their own speed and direction and integrates the trajectory straight through them, so you can see what a sheltered first half really costs you downrange.",
+        "es": "Las calles reales rara vez tienen un solo viento. Zonas de viento divide el disparo en tramos con su propia velocidad y dirección e integra la trayectoria a través de ellos, para que veas lo que realmente cuesta una primera mitad resguardada."
+      }
+    }
+  ],
+
+  "_supportersNote": "A directory of logo tiles, grouped into categories and drawn three across. 'logo' names a drawable bundled in the app (res/drawable + res/raw/keep.xml); a name this build doesn't ship falls back to the supporter's initials, so a newer feed can safely mention artwork an older app has never heard of. 'note' is the one line under the name — keep it to a few words or it clips. 'link.url' takes an {en,es} pair when the site has a separate page per language.",
+
+  "supporters": [
+    {
+      "category": { "en": "SHOPS", "es": "TIENDAS" },
+      "items": [
+        {
+          "name": "Submoa Systems",
+          "logo": "submoasystems",
+          "note": {
+            "en": "Field target shop",
+            "es": "Tienda de field target"
+          },
+          "link": {
+            "url": {
+              "en": "https://submoasystems.com/en/home/",
+              "es": "https://submoasystems.com/"
+            }
+          }
+        }
+      ]
+    }
+  ],
+
+  "thanks": {
+    "intro": {
+      "en": "Wind Master is shaped by the shooters who use it. Thank you to every beta tester who ran the early builds at the range, reported bugs and contributed many of the ideas that are now features — this app is better because of all of you. With special mention to:",
+      "es": "Wind Master lo moldean los tiradores que lo usan. Gracias a todos los beta testers que probaron las primeras versiones en el campo, reportaron fallos y aportaron muchas de las ideas que hoy son funciones — esta aplicación es mejor gracias a todos vosotros. Con mención especial para:"
+    },
+    "people": [
+      { "name": "Alejandro" },
+      { "name": "Pepone" },
+      { "name": "Emilio's" },
+      { "name": "Guillem" },
+      { "name": "George" },
+      { "name": "Victor" },
+      { "name": "Miquel Manzano" },
+      { "name": "Carlos Carvajal" },
+      { "name": "Alfredo" },
+      { "name": "Dreso" },
+      { "name": "Jorge" },
+      { "name": "Abel" }
+    ]
+  },
+
+  "contactEmail": "windmasterft@gmail.com"
+}
