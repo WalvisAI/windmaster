@@ -1,10 +1,23 @@
 {
   "_comment": "Wind Master in-app feed (logo tap -> News / Supporters / Thanks). Two byte-identical copies exist, so this file reads the same in both: app/src/main/assets/news.json in the app repo is the offline seed shipped in the APK, and app/news.json in the WalvisAI/windmaster website repo is the live feed the app fetches every 6 h. To publish an update WITHOUT an app release, edit either copy, bump 'updated', copy it over the other one, and push the website repo. On the device 'updated' is compared as a plain string and the later one wins, with ties going to the cached remote copy — so ALWAYS bump it to something that sorts later than the copy already out there. A second edit on the same day must therefore add a time ('2026-08-10T15:16' sorts after '2026-08-10' and before '2026-08-11'); leaving the date alone makes the cached copy win the tie and the change never appears. A fetch that fails silently keeps whatever the app already had.",
-  "updated": "2026-08-14",
+  "updated": "2026-08-14T14:00",
 
   "_newsNote": "'kind' is 'app' (a feature), 'hw' (a meter or other hardware) or 'partner'. 'logo' names a bundled drawable and is optional — see _supportersNote. 'link.url' may be a plain string or an {en,es} pair when each language has its own page.",
 
   "news": [
+    {
+      "id": "2026-08-14-wind-table-mdots",
+      "date": "2026-08-14",
+      "kind": "app",
+      "title": {
+        "en": "Wind Table in reticle marks",
+        "es": "Tabla de viento en marcas de retícula"
+      },
+      "body": {
+        "en": "Ballistic Calculator -> Wind Table can now give the hold in MDOTS, marks on the reticle of the scope you actually shoot, instead of centimetres or inches. Pick your optic and, on a second focal plane reticle, the magnification you will use.",
+        "es": "Calculadora balística -> Tabla de viento ya puede dar la corrección en MDOTS, marcas de la retícula de la óptica con la que disparas, en lugar de centímetros o pulgadas. Elige tu visor y, si la retícula es de segundo plano focal, los aumentos que vas a usar."
+      }
+    },
     {
       "id": "2026-08-10-wind-observation",
       "date": "2026-08-10",
