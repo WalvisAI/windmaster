@@ -126,7 +126,7 @@
     }
   ],
 
-  "_supportersNote": "A directory of logo tiles, grouped into categories and drawn three across. 'logo' names a drawable bundled in the app (res/drawable + res/raw/keep.xml); a name this build doesn't ship falls back to the supporter's initials, so a newer feed can safely mention artwork an older app has never heard of. 'note' is an optional one-liner under the name — leave it out when the logo already says enough, and keep it to a few words or it clips. 'link.url' takes an {en,es} pair when the site has a separate page per language.",
+  "_supportersNote": "A directory of logo tiles, grouped into categories and drawn three across. 'logo' names a drawable bundled in the app (res/drawable + res/raw/keep.xml). SHIP THE DRAWABLE FIRST: this feed reaches every installed version the moment it is pushed, but the PNG only reaches whoever updates, so naming a logo here before its build is live leaves everyone else looking at the supporter's initials on a blank white plate. That reads as broken, not as a graceful degrade — it happened to Armería Parriego on 2026-08-14. Add the drawable and its keep.xml entry, release the build, THEN push the feed. The initials fallback is there to keep the grid columns intact when a tile is genuinely missing, not to make early naming safe. Artwork should be at least 400px wide and ideally 600: the plate draws it around 96dp, so anything smaller is visibly soft on a modern phone. 'note' is an optional one-liner under the name — leave it out when the logo already says enough, and keep it to a few words or it clips. 'link.url' takes an {en,es} pair when the site has a separate page per language.",
 
   "supporters": [
     {
