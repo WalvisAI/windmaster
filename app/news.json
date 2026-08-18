@@ -1,10 +1,23 @@
 {
   "_comment": "Wind Master in-app feed (logo tap -> News / Supporters / Thanks). Two byte-identical copies exist, so this file reads the same in both: app/src/main/assets/news.json in the app repo is the offline seed shipped in the APK, and app/news.json in the WalvisAI/windmaster website repo is the live feed the app fetches every 6 h. To publish an update WITHOUT an app release, edit either copy, bump 'updated', copy it over the other one, and push the website repo. On the device 'updated' is compared as a plain string and the later one wins, with ties going to the cached remote copy — so ALWAYS bump it to something that sorts later than the copy already out there. A second edit on the same day must therefore add a time ('2026-08-10T15:16' sorts after '2026-08-10' and before '2026-08-11'); leaving the date alone makes the cached copy win the tie and the change never appears. A fetch that fails silently keeps whatever the app already had.",
-  "updated": "2026-08-14T14:00",
+  "updated": "2026-08-18",
 
   "_newsNote": "'kind' is 'app' (a feature), 'hw' (a meter or other hardware) or 'partner'. 'logo' names a bundled drawable and is optional — see _supportersNote. 'link.url' may be a plain string or an {en,es} pair when each language has its own page.",
 
   "news": [
+    {
+      "id": "2026-08-18-wind-quiz",
+      "date": "2026-08-18",
+      "kind": "app",
+      "title": {
+        "en": "Wind Quiz: ten questions, half of them about your own rifle",
+        "es": "Trivial: diez preguntas, la mitad sobre tu propio equipo"
+      },
+      "body": {
+        "en": "A new tile in LEARN. Half the questions come from the field target course — indicators, angles, judgement — and half are computed for your own kit, so the drift, the reticle marks and the clicks are the ones your scope and your profile really give. Some are pictures instead of words: read the mirage through the scope, judge the hanging thread, set the angle on the clock dial, or tap the reticle where your hold goes. It remembers what you get wrong and brings it back, and parks a question once you have had it right three times running.",
+        "es": "Una ficha nueva en APRENDER. La mitad de las preguntas salen del curso de field target — indicadores, ángulos, criterio — y la otra mitad se calculan con tu propio equipo, así que la deriva, las marcas de la retícula y los clics son los que de verdad te dan tu visor y tu perfil. Algunas son imágenes en lugar de texto: lee el espejismo por el visor, juzga el hilo colgante, marca el ángulo en la esfera del reloj o toca la retícula donde va tu corrección. Recuerda lo que fallas y te lo vuelve a preguntar, y aparca una pregunta cuando la aciertas tres veces seguidas."
+      }
+    },
     {
       "id": "2026-08-14-wind-table-mdots",
       "date": "2026-08-14",
