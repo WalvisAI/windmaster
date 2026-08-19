@@ -441,7 +441,6 @@ p { margin: 0 0 1em; }
   object-fit: contain;
 }
 .shop-card .shop-name { font-weight: 800; font-size: 1rem; line-height: 1.25; }
-.shop-card .shop-site { font-size: .82rem; color: var(--text-dim); word-break: break-word; }
 
 /* ---- Hardware spotlight ---- */
 .section-spot {
