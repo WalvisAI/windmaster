@@ -403,14 +403,15 @@ p { margin: 0 0 1em; }
 .faq p { color: var(--text-dim); font-size: .95rem; padding-bottom: 16px; margin: 0; }
 
 /* ---- Specialized shops ---- */
-/* A fixed column count, not auto-fit: the shops are meant to read as one row, and a track floor
-   only has to be a few pixels too wide before the browser silently drops a column and strands the
-   last card on a line of its own. Keep this number equal to the number of visible cards. */
+/* A fixed column count, not auto-fit: a track floor only has to be a few pixels too wide before
+   the browser silently drops a column and strands the last card on a line of its own. Keep the
+   count a divisor of the number of visible cards so no row is left part-empty — six shops read as
+   two rows of three, which is also how the app draws them. */
 .shop-grid {
-  display: grid; gap: 14px; max-width: 820px; margin: 0 auto;
-  grid-template-columns: repeat(5, 1fr);
+  display: grid; gap: 14px; max-width: 660px; margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
 }
-/* One row of five is too tight for a phone; rows of two keep the logos legible. */
+/* Three across is too tight for a phone; rows of two keep the logos legible. */
 @media (max-width: 720px) {
   .shop-grid { grid-template-columns: repeat(2, 1fr); max-width: 420px; }
 }
