@@ -404,16 +404,24 @@ p { margin: 0 0 1em; }
 
 /* ---- Specialized shops ---- */
 /* A fixed column count, not auto-fit: a track floor only has to be a few pixels too wide before
-   the browser silently drops a column and strands the last card on a line of its own. Keep the
-   count a divisor of the number of visible cards so no row is left part-empty — six shops read as
-   two rows of three, which is also how the app draws them. */
+   the browser silently drops a column and strands the last card on a line of its own. Three across
+   is also how the app draws the same list. */
 .shop-grid {
   display: grid; gap: 14px; max-width: 660px; margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
 }
+/* With a count that is not a multiple of three, the leftover card would sit hard against the left
+   edge under the first column and read like a mistake. Put it in the middle track instead. */
+.shop-grid > .shop-card:last-child:nth-child(3n + 1) { grid-column: 2; }
 /* Three across is too tight for a phone; rows of two keep the logos legible. */
 @media (max-width: 720px) {
   .shop-grid { grid-template-columns: repeat(2, 1fr); max-width: 420px; }
+  /* Two tracks have no middle one, so the odd card spans the row and centres itself at the width
+     it would have had anyway (half the row, less half the gap). */
+  .shop-grid > .shop-card:last-child:nth-child(3n + 1) { grid-column: auto; }
+  .shop-grid > .shop-card:last-child:nth-child(2n + 1) {
+    grid-column: 1 / -1; justify-self: center; width: calc(50% - 7px);
+  }
 }
 .shop-card {
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
