@@ -233,12 +233,21 @@ p { margin: 0 0 1em; }
 .btn-play { background: var(--cta); color: var(--cta-ink); box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--cta) 70%, transparent); }
 .btn-play:hover { background: var(--cta-hover); }
 .btn-play svg { width: 20px; height: 20px; }
-.btn-play .bp-sub { font-size: .66rem; font-weight: 600; opacity: .82; letter-spacing: .04em; text-transform: uppercase; }
-.btn-play .bp-main { font-size: 1.02rem; font-weight: 800; letter-spacing: .01em; }
-.btn-play .bp-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.05; text-align: left; }
+.btn .bp-sub { font-size: .66rem; font-weight: 600; opacity: .82; letter-spacing: .04em; text-transform: uppercase; }
+.btn .bp-main { font-size: 1.02rem; font-weight: 800; letter-spacing: .01em; }
+.btn .bp-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.05; text-align: left; }
 .btn-ghost { background: var(--surface-2); color: var(--text); border-color: var(--border-strong); }
 .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 .btn-sm { padding: 9px 15px; font-size: .88rem; }
+/* "coming soon" store button — not a link, no destination yet */
+.btn-soon {
+  background: var(--surface-2); color: var(--text-dim);
+  border-color: var(--border-strong); border-style: dashed; cursor: default;
+}
+.btn-soon:hover { transform: none; }
+.btn-soon svg { width: 20px; height: 20px; }
+.btn-soon .bp-sub { color: var(--gold); opacity: 1; }
+.btn-soon .bp-main { color: var(--text); }
 
 /* ---- Hero ---- */
 .hero { position: relative; padding: clamp(46px, 7vw, 92px) 0 clamp(40px,6vw,72px); background: var(--hero-grad); overflow: hidden; }
