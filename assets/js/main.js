@@ -115,9 +115,11 @@
       var elResult = document.getElementById("cf-result");
       var posting  = !!WEB3FORMS_KEY;
 
-      // show whichever explanation matches the mode we are actually in
-      cform.querySelectorAll(posting ? ".note-post" : ".note-mailto").forEach(function (n) { n.hidden = false; });
-      cform.querySelectorAll(posting ? ".note-mailto" : ".note-post").forEach(function (n) { n.hidden = true; });
+      // show whichever explanation and button label match the mode we are actually in
+      var on  = posting ? ".note-post, .btn-label-post"     : ".note-mailto, .btn-label-mailto";
+      var off = posting ? ".note-mailto, .btn-label-mailto" : ".note-post, .btn-label-post";
+      cform.querySelectorAll(on ).forEach(function (n) { n.hidden = false; });
+      cform.querySelectorAll(off).forEach(function (n) { n.hidden = true; });
       // an address is only required when we post; a mailto: carries its own sender
       if (posting) elEmail.setAttribute("required", "");
       else elEmail.closest(".field").hidden = true;
