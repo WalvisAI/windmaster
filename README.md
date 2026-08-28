@@ -2,12 +2,19 @@
 
 Static marketing site for **WindMaster / Field Target Wind Master** (Android app
 `com.walvisai.fieldtargetwindmaster`). Plain HTML + CSS + vanilla JS — no build
-step, no framework, no external requests. Hosted free on **GitHub Pages**.
+step, no framework. Hosted free on **GitHub Pages**.
 
 - **Bilingual** English / Spanish (in-page toggle; copy pulled from the app's own strings).
 - **Light + dark** themes (follows the OS, with a manual toggle).
-- **Self-contained**: all CSS/JS/images are local, so the page also works offline
-  and leaks nothing to third parties (matching the app's no-tracking stance).
+- **Self-contained**: all CSS/JS/images are local, so the page loads with no
+  third-party requests at all (matching the app's no-tracking stance).
+- **One deliberate exception**: pressing send on the contact form POSTs to
+  `api.web3forms.com`, which forwards the message to `windmasterft@gmail.com`.
+  It fires only on that click, never on page load, so a visitor who does not use
+  the form still reaches no third party. The access key in `main.js` is public by
+  design — Web3Forms keys are meant to sit in client-side code. Blank the
+  `WEB3FORMS_KEY` constant and the form falls back to a `mailto:` link, which is
+  how it behaved before. Disclosed in `privacy.html` § 10; keep those in sync.
 
 ## Structure
 

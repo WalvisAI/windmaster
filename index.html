@@ -13,7 +13,7 @@
   <meta property="og:description" content="A real airgun ballistics engine, authentic scope reticles and live wind. Train reticle & wind reading anywhere. Android · 10 languages.">
   <meta property="og:image" content="assets/img/logo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260828b">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260828c">
   <script>
     (function () {
       try {
@@ -500,6 +500,11 @@
           <input id="cf-name" type="text" autocomplete="name"
                  data-en-placeholder="How should I call you?" data-es-placeholder="¿Cómo te llamo?">
         </div>
+        <div class="field">
+          <label for="cf-email" data-en="Your email" data-es="Tu correo">Your email</label>
+          <input id="cf-email" type="email" autocomplete="email"
+                 data-en-placeholder="So I can reply to you" data-es-placeholder="Para poder responderte">
+        </div>
 
         <div class="field">
           <label for="cf-message" data-en="Your message" data-es="Tu mensaje">Your message</label>
@@ -508,13 +513,20 @@
                     data-es-placeholder="Cuéntame lo que quieras."></textarea>
         </div>
 
+        <!-- honeypot: real people never see this, bots fill it in and get dropped -->
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <p class="form-result" id="cf-result" role="status" aria-live="polite" hidden></p>
+
         <button type="submit" class="btn btn-play">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg>
           <span data-en="Open in my email app" data-es="Abrir en mi app de correo">Open in my email app</span>
         </button>
 
-        <p class="form-note lang-en">This site has no server and collects nothing. The button opens your own email app with the message ready, so you send it yourself and keep a copy. If nothing opens, copy the address above.</p>
-        <p class="form-note lang-es">Esta web no tiene servidor y no recoge nada. El botón abre tu propia app de correo con el mensaje preparado, así lo envías tú y te queda una copia. Si no se abre nada, copia la dirección de arriba.</p>
+        <p class="form-note note-mailto lang-en">This site has no server and collects nothing. The button opens your own email app with the message ready, so you send it yourself and keep a copy. If nothing opens, copy the address above.</p>
+        <p class="form-note note-mailto lang-es">Esta web no tiene servidor y no recoge nada. El botón abre tu propia app de correo con el mensaje preparado, así lo envías tú y te queda una copia. Si no se abre nada, copia la dirección de arriba.</p>
+        <p class="form-note note-post lang-en" hidden>Your message is delivered to my inbox by Web3Forms, which forwards it and keeps no copy. Your address is used to reply to you and nothing else. See the <a href="privacy.html">privacy policy</a>.</p>
+        <p class="form-note note-post lang-es" hidden>Tu mensaje llega a mi bandeja a través de Web3Forms, que solo lo reenvía y no guarda copia. Tu dirección se usa para responderte y para nada más. Consulta la <a href="privacy.html">política de privacidad</a>.</p>
       </form>
     </div>
   </div>
@@ -572,7 +584,7 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=20260828a" defer></script>
+<script src="assets/js/main.js?v=20260828c" defer></script>
 <script src="assets/js/charts.js?v=20260810c" defer></script>
 </body>
 </html>

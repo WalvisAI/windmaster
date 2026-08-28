@@ -99,26 +99,114 @@
       });
     }
 
-    // contact form -> mailto: (the site has no backend on purpose; see README)
+    /* ---------- Contact form ----------
+       Web3Forms takes the POST and forwards it to windmasterft@gmail.com. Until an access
+       key is set the form falls back to a mailto:, so the page is never broken by a blank
+       key -- it just degrades to the visitor's own mail app. Swap the constant and the
+       form starts sending for real; nothing else needs to change. */
+    var WEB3FORMS_KEY = "7c26d907-36c4-4871-a421-26e8abbd8e5d";  // public by design: Web3Forms keys are client-side
+
     var cform = document.getElementById("contact-form");
     if (cform) {
+      var elMsg    = document.getElementById("cf-message");
+      var elName   = document.getElementById("cf-name");
+      var elEmail  = document.getElementById("cf-email");
+      var elTopic  = document.getElementById("cf-topic");
+      var elResult = document.getElementById("cf-result");
+      var posting  = !!WEB3FORMS_KEY;
+
+      // show whichever explanation matches the mode we are actually in
+      cform.querySelectorAll(posting ? ".note-post" : ".note-mailto").forEach(function (n) { n.hidden = false; });
+      cform.querySelectorAll(posting ? ".note-mailto" : ".note-post").forEach(function (n) { n.hidden = true; });
+      // an address is only required when we post; a mailto: carries its own sender
+      if (posting) elEmail.setAttribute("required", "");
+      else elEmail.closest(".field").hidden = true;
+
+      var T = {
+        needMessage: { en: "Please write a message first.",       es: "Escribe un mensaje primero." },
+        needEmail:   { en: "Please add an email so I can reply.", es: "Añade un correo para que pueda responderte." },
+        badEmail:    { en: "That email does not look right.",     es: "Ese correo no parece correcto." },
+        sending:     { en: "Sending…",                        es: "Enviando…" },
+        sent:        { en: "Thank you. Your message is on its way and I will reply to you by email.",
+                       es: "Gracias. Tu mensaje va de camino y te responderé por correo." },
+        failed:      { en: "That did not go through. Please write to windmasterft@gmail.com instead.",
+                       es: "No se ha podido enviar. Escríbeme a windmasterft@gmail.com." }
+      };
+      function lang() { return root.getAttribute("data-lang") === "es" ? "es" : "en"; }
+      function say(key, kind) {
+        elResult.textContent = T[key][lang()];
+        elResult.className = "form-result " + (kind || "");
+        elResult.hidden = false;
+      }
+      function fail(field, key) {
+        field.parentNode.classList.add("invalid");
+        field.focus();
+        say(key, "err");
+      }
+
+      [elMsg, elEmail].forEach(function (f) {
+        f.addEventListener("input", function () {
+          this.parentNode.classList.remove("invalid");
+          if (elResult.classList.contains("err")) elResult.hidden = true;
+        });
+      });
+
       cform.addEventListener("submit", function (ev) {
         ev.preventDefault();
-        var msgField = document.getElementById("cf-message");
-        var body = (msgField.value || "").trim();
-        if (!body) { msgField.parentNode.classList.add("invalid"); msgField.focus(); return; }
-        msgField.parentNode.classList.remove("invalid");
+        cform.querySelectorAll(".field").forEach(function (f) { f.classList.remove("invalid"); });
 
-        var topic = document.getElementById("cf-topic").value;
-        var name  = (document.getElementById("cf-name").value || "").trim();
-        if (name) body += "\n\n-- " + name;
+        var body = (elMsg.value || "").trim();
+        if (!body) { fail(elMsg, "needMessage"); return; }
 
-        window.location.href = "mailto:windmasterft@gmail.com"
-          + "?subject=" + encodeURIComponent("[WindMaster] " + topic)
-          + "&body="    + encodeURIComponent(body);
-      });
-      document.getElementById("cf-message").addEventListener("input", function () {
-        this.parentNode.classList.remove("invalid");
+        var topic = elTopic.value;
+        var name  = (elName.value || "").trim();
+
+        if (!posting) {
+          if (name) body += "\n\n-- " + name;
+          elResult.hidden = true;
+          window.location.href = "mailto:windmasterft@gmail.com"
+            + "?subject=" + encodeURIComponent("[WindMaster] " + topic)
+            + "&body="    + encodeURIComponent(body);
+          return;
+        }
+
+        var email = (elEmail.value || "").trim();
+        if (!email) { fail(elEmail, "needEmail"); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { fail(elEmail, "badEmail"); return; }
+
+        say("sending", "");
+        cform.classList.add("sending");
+
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject:    "[WindMaster] " + topic,
+            from_name:  "WindMaster website",
+            name:       name || "(no name given)",
+            email:      email,
+            replyto:    email,
+            topic:      topic,
+            site_language: lang(),
+            message:    body,
+            botcheck:   cform.querySelector("[name=botcheck]").checked
+          })
+        })
+        .then(function (r) { return r.json().catch(function () { return { success: r.ok }; }); })
+        .then(function (data) {
+          cform.classList.remove("sending");
+          if (data && data.success) {
+            say("sent", "ok");
+            cform.reset();
+          } else {
+            say("failed", "err");
+          }
+        })
+        .catch(function () {
+          cform.classList.remove("sending");
+          say("failed", "err");
+        });
       });
     }
 
