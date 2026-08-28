@@ -192,7 +192,7 @@ p { margin: 0 0 1em; }
 .brand-logotype .wm-master { font-size: .62rem; letter-spacing: .34em; }
 .nav-links { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 .nav-links a {
-  color: var(--text-dim); font-weight: 600; font-size: .93rem;
+  color: var(--text-dim); font-weight: 600; font-size: .93rem; white-space: nowrap;
   padding: 8px 12px; border-radius: 9px; transition: color .15s, background .15s;
 }
 .nav-links a:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
@@ -581,7 +581,7 @@ p { margin: 0 0 1em; }
   .mode-media { order: -1; }
   .tiers { grid-template-columns: 1fr; }
 }
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
   .nav-links { display: none; }
   .nav-links.open {
     display: flex; position: absolute; top: 66px; left: 0; right: 0; flex-direction: column;
