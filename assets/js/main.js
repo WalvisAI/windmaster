@@ -22,13 +22,13 @@
       var val = el.getAttribute("data-" + lang);
       if (val !== null) el.textContent = val;
     }
-    // swap attributes:  data-en-<attr> / data-es-<attr>  (e.g. data-en-aria-label)
+    // swap attributes:  data-en-<attr> / data-es-<attr>  (e.g. data-en-aria-label, data-en-placeholder)
     // href is in the list so a link can point each language at its own page — a shop with a
     // separate English storefront, say. The markup still carries a real href for no-JS readers.
-    var attrNodes = document.querySelectorAll("[data-" + lang + "-aria-label], [data-" + lang + "-title], [data-" + lang + "-alt], [data-" + lang + "-href]");
+    var attrNodes = document.querySelectorAll("[data-" + lang + "-aria-label], [data-" + lang + "-title], [data-" + lang + "-alt], [data-" + lang + "-href], [data-" + lang + "-placeholder]");
     for (var j = 0; j < attrNodes.length; j++) {
       var a = attrNodes[j];
-      ["aria-label", "title", "alt", "href"].forEach(function (attr) {
+      ["aria-label", "title", "alt", "href", "placeholder"].forEach(function (attr) {
         var v = a.getAttribute("data-" + lang + "-" + attr);
         if (v !== null) a.setAttribute(attr, v);
       });
@@ -98,6 +98,53 @@
         });
       });
     }
+
+    // contact form -> mailto: (the site has no backend on purpose; see README)
+    var cform = document.getElementById("contact-form");
+    if (cform) {
+      cform.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var msgField = document.getElementById("cf-message");
+        var body = (msgField.value || "").trim();
+        if (!body) { msgField.parentNode.classList.add("invalid"); msgField.focus(); return; }
+        msgField.parentNode.classList.remove("invalid");
+
+        var topic = document.getElementById("cf-topic").value;
+        var name  = (document.getElementById("cf-name").value || "").trim();
+        if (name) body += "\n\n-- " + name;
+
+        window.location.href = "mailto:windmasterft@gmail.com"
+          + "?subject=" + encodeURIComponent("[WindMaster] " + topic)
+          + "&body="    + encodeURIComponent(body);
+      });
+      document.getElementById("cf-message").addEventListener("input", function () {
+        this.parentNode.classList.remove("invalid");
+      });
+    }
+
+    // copy-to-clipboard buttons (falls back to selecting nothing rather than throwing)
+    document.querySelectorAll("[data-copy]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var text = b.getAttribute("data-copy");
+        var done = function () {
+          var cur = function () { return root.getAttribute("data-lang") === "es" ? "es" : "en"; };
+          b.textContent = cur() === "es" ? "¡Copiado!" : "Copied";
+          setTimeout(function () {
+            // read the label back off the data attributes so a language switch mid-timeout wins
+            b.textContent = b.getAttribute("data-" + cur()) || b.textContent;
+          }, 1800);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () {});
+        } else {
+          var ta = document.createElement("textarea");
+          ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "absolute"; ta.style.left = "-9999px";
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand("copy"); done(); } catch (e) {}
+          document.body.removeChild(ta);
+        }
+      });
+    });
 
     // current year
     var y = document.querySelector("[data-year]");
