@@ -471,6 +471,22 @@ p { margin: 0 0 1em; }
 .hw-list { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 11px; }
 .hw-list li { display: flex; gap: 11px; align-items: flex-start; color: var(--text-dim); font-size: .96rem; }
 .hw-list svg { width: 19px; height: 19px; color: var(--green); flex: none; margin-top: 2px; }
+/* Meter cards. Unlike .shop-plate, these product shots are cut out of their studio
+   background, so they drop straight onto the surface and read in both themes. */
+.meter-label { margin: 22px 0 10px; font-size: .74rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--text-mute); }
+.meter-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.meter-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 16px 16px; text-decoration: none; color: inherit;
+  transition: transform .16s, border-color .16s;
+}
+.meter-card:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+/* Height-capped so the two shots share an optical baseline whatever their intrinsic size;
+   min-* is what lets the cap bite on a flex item (same trap as .shop-plate img). */
+.meter-card img { display: block; flex: none; width: auto; height: 132px; min-width: 0; min-height: 0; max-width: 100%; object-fit: contain; }
+.meter-card .meter-name { display: block; font-weight: 800; font-size: .95rem; line-height: 1.25; }
+.meter-card .meter-what { display: block; margin-top: 5px; font-size: .8rem; font-weight: 600; color: var(--text-dim); }
 .vendor-note { margin-top: 18px; font-size: .84rem; color: var(--text-mute); }
 
 /* ---- Gallery strip ---- */
