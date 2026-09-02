@@ -26,10 +26,8 @@
   --cta:           #3d8b3d;
   --cta-hover:     #4a9d4a;
   --cta-ink:       #061006;
-  --apple:         #14181c;
-  --apple-hover:   #232a31;
-  --apple-ink:     #f4f7f4;
-  --apple-line:    rgba(244,247,244,0.16);
+  --new-flag:      #ffc531;
+  --new-flag-ink:  #241a00;
   --good:          #52c07a;
   --warn:          #e0b83e;
   --bad:           #e06a6a;
@@ -231,25 +229,29 @@ p { margin: 0 0 1em; }
   display: inline-flex; align-items: center; gap: 10px; justify-content: center;
   font-weight: 700; font-size: .98rem; padding: 13px 20px; border-radius: 12px;
   border: 1px solid transparent; cursor: pointer; transition: transform .12s, background .15s, border-color .15s;
-  text-decoration: none; line-height: 1;
+  text-decoration: none; line-height: 1; position: relative;
 }
 .btn:hover { text-decoration: none; transform: translateY(-1px); }
-.btn-play { background: var(--cta); color: var(--cta-ink); box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--cta) 70%, transparent); }
-.btn-play:hover { background: var(--cta-hover); }
-.btn-play svg { width: 20px; height: 20px; }
+/* Both stores get the identical button. They are equal ways to buy the same app,
+   and anything that weights one over the other reads as "the other one is not
+   really ready". */
+.btn-play, .btn-apple { background: var(--cta); color: var(--cta-ink); box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--cta) 70%, transparent); }
+.btn-play:hover, .btn-apple:hover { background: var(--cta-hover); }
+.btn-play svg, .btn-apple svg { width: 20px; height: 20px; }
 .btn .bp-sub { font-size: .66rem; font-weight: 600; opacity: .82; letter-spacing: .04em; text-transform: uppercase; }
 .btn .bp-main { font-size: 1.02rem; font-weight: 800; letter-spacing: .01em; }
 .btn .bp-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.05; text-align: left; }
 .btn-ghost { background: var(--surface-2); color: var(--text); border-color: var(--border-strong); }
 .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 .btn-sm { padding: 9px 15px; font-size: .88rem; }
-/* App Store button — the dark plate beside the green Play one */
-.btn-apple {
-  background: var(--apple); color: var(--apple-ink); border-color: var(--apple-line);
-  box-shadow: 0 10px 30px -12px rgba(0,0,0,0.6);
+/* "NEW" flag. Fixed colours, like the app's game palette: it has to stay loud on
+   the green button and in both themes, so it does not follow the theme tokens. */
+.pill-new {
+  display: inline-block; background: var(--new-flag); color: var(--new-flag-ink);
+  font-size: .62rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase;
+  padding: 3px 7px; border-radius: 999px; line-height: 1; vertical-align: middle;
 }
-.btn-apple:hover { background: var(--apple-hover); }
-.btn-apple svg { width: 20px; height: 20px; }
+.btn .pill-new { position: absolute; top: -9px; right: -9px; box-shadow: 0 4px 12px -4px rgba(0,0,0,0.55); }
 
 /* A pair of store buttons, plus the availability caveat under them. */
 .store-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
