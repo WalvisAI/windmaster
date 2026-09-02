@@ -1,8 +1,13 @@
 # WindMaster — marketing site
 
-Static marketing site for **WindMaster / Field Target Wind Master** (Android app
-`com.walvisai.fieldtargetwindmaster`). Plain HTML + CSS + vanilla JS — no build
-step, no framework. Hosted free on **GitHub Pages**.
+Static marketing site for **WindMaster / Field Target Wind Master** — the Android
+app `com.walvisai.fieldtargetwindmaster` on Google Play, and *WindMaster Airgun
+Ballistics* (id `6805077876`) on the App Store. Plain HTML + CSS + vanilla JS — no
+build step, no framework. Hosted free on **GitHub Pages**.
+
+The App Store release is region by region and the **EU storefronts are not open
+yet**, which is why every store-button pair carries a `.store-note` saying so, and
+why the FAQ has an entry about it. Drop those once the EU goes live.
 
 - **Bilingual** English / Spanish (in-page toggle; copy pulled from the app's own strings).
 - **Light + dark** themes (follows the OS, with a manual toggle).
