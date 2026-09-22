@@ -509,6 +509,27 @@ p { margin: 0 0 1em; }
 .scope-count .n { font-size: 2rem; font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: -0.02em; }
 .scope-count .l { color: var(--text-dim); font-size: .85rem; }
 
+/* ---- Scope catalogue ---- */
+.scope-catalog { margin-top: clamp(46px,6vw,76px); }
+.scope-catalog .section-head { margin-bottom: clamp(26px,4vw,40px); }
+.scope-catalog .section-head h3 { font-size: clamp(1.4rem,2.4vw,1.9rem); margin-bottom: .5em; }
+.scope-catalog .section-head p { color: var(--text-dim); font-size: .98rem; }
+.scope-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; align-items: start; }
+.scope-group { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 20px 14px; }
+.scope-group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.scope-group-head h4 { font-size: .95rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin: 0; }
+.scope-group-n { font-size: .78rem; font-weight: 700; color: var(--text-mute); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; flex: none; }
+.scope-rows { list-style: none; margin: 0; padding: 0; }
+.scope-rows li { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.scope-rows li:last-child { border-bottom: 0; }
+.sc-name { font-size: .92rem; font-weight: 600; color: var(--text); }
+.sc-meta { display: inline-flex; align-items: baseline; gap: 8px; flex: none; }
+.sc-fp { font-size: .68rem; font-weight: 700; letter-spacing: .06em; color: var(--green); background: color-mix(in srgb, var(--green) 14%, transparent); border-radius: 5px; padding: 2px 6px; }
+.sc-mag { font-size: .8rem; font-weight: 600; color: var(--text-mute); font-variant-numeric: tabular-nums; min-width: 4.6em; text-align: right; }
+.sc-free { font-size: .66rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-ink); background: var(--gold); border-radius: 999px; padding: 2px 7px; vertical-align: 1px; white-space: nowrap; }
+.scope-vote { margin: 22px auto 0; max-width: 640px; text-align: center; color: var(--text-dim); font-size: .9rem; }
+.scope-legal { margin: 10px auto 0; max-width: 640px; text-align: center; color: var(--text-mute); font-size: .78rem; }
+
 /* ---- Callout ---- */
 .callout { display: flex; gap: 16px; background: var(--surface-2); border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: var(--radius); padding: 20px 22px; }
 .callout svg { width: 24px; height: 24px; color: var(--green); flex: none; }
