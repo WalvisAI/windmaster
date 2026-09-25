@@ -26,8 +26,6 @@
   --cta:           #3d8b3d;
   --cta-hover:     #4a9d4a;
   --cta-ink:       #061006;
-  --new-flag:      #ffc531;
-  --new-flag-ink:  #241a00;
   --good:          #52c07a;
   --warn:          #e0b83e;
   --bad:           #e06a6a;
@@ -244,15 +242,6 @@ p { margin: 0 0 1em; }
 .btn-ghost { background: var(--surface-2); color: var(--text); border-color: var(--border-strong); }
 .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 .btn-sm { padding: 9px 15px; font-size: .88rem; }
-/* "NEW" flag. Fixed colours, like the app's game palette: it has to stay loud on
-   the green button and in both themes, so it does not follow the theme tokens. */
-.pill-new {
-  display: inline-block; background: var(--new-flag); color: var(--new-flag-ink);
-  font-size: .62rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase;
-  padding: 3px 7px; border-radius: 999px; line-height: 1; vertical-align: middle;
-}
-.btn .pill-new { position: absolute; top: -9px; right: -9px; box-shadow: 0 4px 12px -4px rgba(0,0,0,0.55); }
-
 /* A pair of store buttons. */
 .store-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
 
