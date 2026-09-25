@@ -253,7 +253,6 @@ p { margin: 0 0 1em; }
   color: var(--text-dim); background: var(--surface-2); border: 1px solid var(--border);
   padding: 6px 13px; border-radius: 999px; margin-bottom: 22px;
 }
-.hero-badge b { color: var(--good); font-weight: 700; }
 .hero h1 { font-size: clamp(2.3rem, 5.4vw, 4rem); font-weight: 900; letter-spacing: -0.02em; }
 .hero h1 .hl { color: var(--gold); }
 .hero-tagline { font-size: clamp(1.05rem, 2.1vw, 1.3rem); color: var(--text-dim); max-width: 34ch; margin-bottom: 1.6em; }
