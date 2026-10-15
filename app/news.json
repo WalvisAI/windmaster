@@ -1,15 +1,44 @@
 {
   "_comment": "Wind Master in-app feed (logo tap -> News / Supporters / Thanks). Two byte-identical copies exist, so this file reads the same in both: app/src/main/assets/news.json in the app repo is the offline seed shipped in the APK, and app/news.json in the WalvisAI/windmaster website repo is the live feed the app fetches every 6 h. To publish an update WITHOUT an app release, edit either copy, bump 'updated', copy it over the other one, and push the website repo. On the device 'updated' is compared as a plain string and the later one wins, with ties going to the cached remote copy — so ALWAYS bump it to something that sorts later than the copy already out there. A second edit on the same day must therefore add a time ('2026-08-10T15:16' sorts after '2026-08-10' and before '2026-08-11'); leaving the date alone makes the cached copy win the tie and the change never appears. A fetch that fails silently keeps whatever the app already had.",
-  "updated": "2026-10-05",
+  "updated": "2026-10-15",
 
   "_newsNote": "'kind' is 'app' (a feature), 'hw' (a meter or other hardware) or 'partner'. 'logo' names a bundled drawable and is optional — see _supportersNote. 'link.url' may be a plain string or an {en,es} pair when each language has its own page. 'new': true draws a second NEW badge beside the kind. It is editorial, not derived from the date, and nothing on the device expires it — clear it by hand once the entry stops being the newest thing. Builds from before 2026-08-31 do not know the key and simply draw the entry without the badge, so publishing it ahead of a release costs nothing.",
 
   "news": [
     {
+      "id": "2026-10-15-hw-phomemo-m02pro",
+      "date": "2026-10-15",
+      "kind": "hw",
+      "new": true,
+      "logo": "phomemo_m02pro",
+      "title": {
+        "en": "Print your tables in the field: Phomemo M02 Pro",
+        "es": "Imprime tus tablas en el campo: Phomemo M02 Pro"
+      },
+      "body": {
+        "en": "WindMaster now prints straight to the Phomemo M02 Pro, a pocket-sized Bluetooth thermal printer. Print the ballistic table with a column for each muzzle speed or each air temperature. When the cold or the heat moves your speed, you read the matching column instead of re-tuning the hammer: the rifle stays as it is, only the column you read changes. The angle table, the wind table and the HFT dope card print too. A split strip folds over a card, so you get a front and a back. No more trips to the print shop. Look for Print (Bluetooth) in each table's menu.",
+        "es": "WindMaster ya imprime directamente en la Phomemo M02 Pro, una impresora térmica Bluetooth de bolsillo. Imprime la tabla balística con una columna por cada velocidad en boca o por cada temperatura del aire. Si el frío o el calor te mueven la velocidad, lees la columna que toca en lugar de volver a ajustar el martillo: el arma se queda como está, solo cambia la columna que miras. También se imprimen la tabla de ángulos, la tabla de viento y la tarjeta de tiro de HFT. Una tira dividida se dobla sobre una tarjeta, para tener anverso y reverso. Se acabó ir a la imprenta. Busca Imprimir (Bluetooth) en el menú de cada tabla."
+      }
+    },
+    {
+      "id": "2026-10-15-training-weather-graph",
+      "date": "2026-10-15",
+      "kind": "app",
+      "new": true,
+      "logo": "training_weather_graph",
+      "title": {
+        "en": "Training log: the weather across your session",
+        "es": "Registro de entrenamiento: el tiempo durante tu sesión"
+      },
+      "body": {
+        "en": "Give a session in Learn -> Training its start and end time and tap GET WEATHER OVER SESSION. WindMaster pulls the weather at the spot you shot from, every 15 minutes across the session: temperature, humidity, pressure, the wind with its gusts and direction, and the air density, worked out the same way the ballistic solver does it. Each line has its own scale; tap a row to hide it and drag along the graph to read any moment. When your hits wander through the morning, you can now see what the air was doing while they did. It works for older sessions too.",
+        "es": "Pon la hora de inicio y de fin a una sesión en Aprender -> Entrenamiento y toca OBTENER TIEMPO DE LA SESIÓN. WindMaster descarga el tiempo del lugar donde tiraste, cada 15 minutos a lo largo de la sesión: temperatura, humedad, presión, el viento con sus rachas y su dirección, y la densidad del aire, calculada igual que lo hace la calculadora balística. Cada línea tiene su propia escala; toca una fila para ocultarla y desliza por el gráfico para leer cualquier momento. Cuando tus impactos se desplazan a lo largo de la mañana, ahora puedes ver qué hacía el aire mientras tanto. También funciona con sesiones antiguas."
+      }
+    },
+    {
       "id": "2026-09-25-hw-calypso-live",
       "date": "2026-09-25",
       "kind": "hw",
-      "new": true,
       "logo": "calypso",
       "title": {
         "en": "Calypso Ultrasonic — supported today",
