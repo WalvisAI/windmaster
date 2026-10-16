@@ -225,10 +225,10 @@
           }
         },
         {
-          "name": "Rowan Engineering",
-          "logo": "rowan",
+          "name": "Garima",
+          "logo": "garima",
           "link": {
-            "url": "https://rowanengineering.com/"
+            "url": "https://www.garima.it/"
           }
         },
         {
@@ -239,10 +239,10 @@
           }
         },
         {
-          "name": "Garima",
-          "logo": "garima",
+          "name": "Rowan Engineering",
+          "logo": "rowan",
           "link": {
-            "url": "https://www.garima.it/"
+            "url": "https://rowanengineering.com/"
           }
         }
       ]
