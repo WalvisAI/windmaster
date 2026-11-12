@@ -666,3 +666,5 @@ p { margin: 0 0 1em; }
   .diy-photo { grid-area: auto !important; aspect-ratio: 4 / 3; }
   .diy-photo-e { aspect-ratio: 3 / 4; }
 }
+.diy-reco { align-self: flex-start; font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--cta-ink); background: var(--green); padding: 3px 10px; border-radius: 999px; margin-bottom: 8px; display: inline-block; }
+.diy-product:has(.diy-reco) { border-color: color-mix(in srgb, var(--green) 55%, var(--border)); }

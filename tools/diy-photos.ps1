@@ -8,8 +8,9 @@ $codec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Obj
 $params = New-Object System.Drawing.Imaging.EncoderParameters 1
 $params.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter ([System.Drawing.Imaging.Encoder]::Quality, [long]82)
 
-# Region to hide, as fractions of width/height (x, y, w, h).
-$hide = @{ "shooter-view.jpg" = @(0.0, 0.0, 0.43, 0.40) }
+# Regions to hide, as fractions of width/height (x, y, w, h). shooter-view: the chat's top bar,
+# then the chat text column, stopping short of the scope's white dial ring.
+$hide = @{ "shooter-view.jpg" = @(@(0.0, 0.0, 0.42, 0.05), @(0.0, 0.0, 0.22, 0.38)) }
 
 Get-ChildItem $dir -Filter *.jpg | ForEach-Object {
   $src = [System.Drawing.Image]::FromFile($_.FullName)
@@ -21,8 +22,7 @@ Get-ChildItem $dir -Filter *.jpg | ForEach-Object {
   $g.DrawImage($src, 0, 0, $w, $h)
   $src.Dispose()
 
-  if ($hide.ContainsKey($_.Name)) {
-    $r = $hide[$_.Name]
+  if ($hide.ContainsKey($_.Name)) { foreach ($r in $hide[$_.Name]) {
     $rx = [int]($r[0] * $w); $ry = [int]($r[1] * $h); $rw = [int]($r[2] * $w); $rh = [int]($r[3] * $h)
     $rect = New-Object System.Drawing.Rectangle $rx, $ry, $rw, $rh
     $crop = $out.Clone($rect, $out.PixelFormat)
@@ -33,7 +33,7 @@ Get-ChildItem $dir -Filter *.jpg | ForEach-Object {
     $g.InterpolationMode = "HighQualityBilinear"
     $g.DrawImage($tiny, $rect)
     $tiny.Dispose(); $crop.Dispose()
-  }
+  } }
   $g.Dispose()
   $tmp = $_.FullName + ".tmp"
   $out.Save($tmp, $codec, $params); $out.Dispose()
