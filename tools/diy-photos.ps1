@@ -1,7 +1,8 @@
 # Prepares the 360 VIEW DIY photos in assets/img/diy/:
 #  - shooter-view.jpg: pixelates the monitor in the top-left corner (readable chat text)
 #  - every .jpg: downscaled to at most 1400 px on the long side, re-saved at quality 82
-# Run from the repo root:  powershell -ExecutionPolicy Bypass -File tools/diy-photos.ps1
+# Run from the repo root:  powershell -ExecutionPolicy Bypass -File tools/diy-photos.ps1 [-Only name.jpg]
+param([string]$Only = "")
 Add-Type -AssemblyName System.Drawing
 $dir = Join-Path $PSScriptRoot "..\assets\img\diy"
 $codec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq "image/jpeg" }
@@ -12,7 +13,7 @@ $params.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter ([System.D
 # then the chat text column, stopping short of the scope's white dial ring.
 $hide = @{ "shooter-view.jpg" = @(@(0.0, 0.0, 0.42, 0.05), @(0.0, 0.0, 0.22, 0.38)) }
 
-Get-ChildItem $dir -Filter *.jpg | ForEach-Object {
+Get-ChildItem $dir -Filter *.jpg | Where-Object { -not $Only -or $_.Name -eq $Only } | ForEach-Object {
   $src = [System.Drawing.Image]::FromFile($_.FullName)
   $scale = [Math]::Min(1.0, 1400.0 / [Math]::Max($src.Width, $src.Height))
   $w = [int]($src.Width * $scale); $h = [int]($src.Height * $scale)
