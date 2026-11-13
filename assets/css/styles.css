@@ -181,22 +181,23 @@ p { margin: 0 0 1em; }
 }
 .nav {
   display: flex; align-items: center; gap: 18px;
-  height: 66px; max-width: var(--maxw); margin: 0 auto; padding: 0 22px;
+  height: 66px; max-width: 1440px; margin: 0 auto; padding: 0 22px;
 }
-.brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: .02em; }
+.brand { display: flex; flex-shrink: 0; align-items: center; gap: 11px; font-weight: 800; letter-spacing: .02em; }
 .brand img { width: 34px; height: 34px; border-radius: 9px; }
 .brand .wm-wind { color: var(--wind); }
 .brand .wm-master { color: var(--master); font-weight: 700; }
 .brand-logotype { display: flex; flex-direction: column; line-height: .96; }
 .brand-logotype .wm-wind { font-size: 1.02rem; letter-spacing: .22em; }
 .brand-logotype .wm-master { font-size: .62rem; letter-spacing: .34em; }
-.nav-links { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.nav-links { display: flex; align-items: center; gap: 2px; margin-left: auto; }
 .nav-links a {
   color: var(--text-dim); font-weight: 600; font-size: .93rem; white-space: nowrap;
-  padding: 8px 12px; border-radius: 9px; transition: color .15s, background .15s;
+  padding: 8px 10px; border-radius: 9px; transition: color .15s, background .15s;
 }
 .nav-links a:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
-.nav-tools { display: flex; align-items: center; gap: 8px; }
+.nav-links a.nav-coffee { color: var(--gold); }
+.nav-tools { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 .toggle-group { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
 .toggle-group button {
   border: 0; background: transparent; color: var(--text-dim);
@@ -219,7 +220,7 @@ p { margin: 0 0 1em; }
   :root:not([data-theme="dark"]) .theme-sun { display: none; }
   :root:not([data-theme="dark"]) .theme-moon { display: block; }
 }
-.nav-cta { display: inline-flex; }
+.nav-cta { display: inline-flex; white-space: nowrap; }
 .hamburger { display: none; }
 
 /* ---- Buttons ---- */
@@ -622,7 +623,7 @@ p { margin: 0 0 1em; }
   .mode-media { order: -1; }
   .tiers { grid-template-columns: 1fr; }
 }
-@media (max-width: 1180px) {
+@media (max-width: 1440px) {
   .nav-links { display: none; }
   .nav-links.open {
     display: flex; position: absolute; top: 66px; left: 0; right: 0; flex-direction: column;
