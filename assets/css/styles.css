@@ -645,6 +645,7 @@ p { margin: 0 0 1em; }
 .diy-kit .card h3 { font-size: 1.05rem; }
 .diy-safety { margin-top: 22px; border-left-color: var(--warn); }
 .diy-safety > svg { color: var(--warn); }
+.diy-gyro { margin-top: 14px; }
 .diy-firmware { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 4vw, 48px); align-items: start; margin-top: clamp(40px, 6vw, 64px); padding: clamp(20px, 3vw, 32px); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
 .diy-firmware p { color: var(--text-dim); }
 .diy-steps { margin: 0; padding-left: 1.3em; display: grid; gap: 9px; color: var(--text-dim); font-size: .94rem; }
